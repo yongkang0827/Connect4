@@ -17,7 +17,7 @@ public class Player {
     private String tokenColour;
     private double score;
     private int winner;
-    token token = new token();
+    
 
     public Player() {
     }
@@ -59,13 +59,6 @@ public class Player {
         this.winner = winner;
     }
 
-    public token getToken() {
-        return token;
-    }
-
-    public void setToken(token token) {
-        this.token = token;
-    }
 
     @Override
     public int hashCode() {
@@ -74,7 +67,6 @@ public class Player {
         hash = 43 * hash + Objects.hashCode(this.tokenColour);
         hash = 43 * hash + (int) (Double.doubleToLongBits(this.score) ^ (Double.doubleToLongBits(this.score) >>> 32));
         hash = 43 * hash + this.winner;
-        hash = 43 * hash + Objects.hashCode(this.token);
         return hash;
     }
 
@@ -102,9 +94,7 @@ public class Player {
         if (!Objects.equals(this.tokenColour, other.tokenColour)) {
             return false;
         }
-        if (!Objects.equals(this.token, other.token)) {
-            return false;
-        }
+      
         return true;
     }
     

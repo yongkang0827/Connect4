@@ -181,7 +181,7 @@ public class ConnectFour {
     // we assemble all the pieces of the puzzle for 
     // building our Connect Four Game
     
-      
+      play.displayPlayerDetails(PlayerList);
 
         
         

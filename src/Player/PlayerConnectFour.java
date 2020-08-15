@@ -31,7 +31,7 @@ public class PlayerConnectFour {
          return tokenName;
     }
     
-    int addPlayer(Player player, ArrayList<Player> PlayerList){
+    int addPlayer(Player player, ListInterface<Player> PlayerList){
         
         int numOfPlayer;
         int check = 0;
@@ -83,7 +83,7 @@ public class PlayerConnectFour {
       return numOfPlayer;
     }
     
-    String[] assignedPlayer(Player player,ArrayList<Player> PlayerList,int numOfPlayer){
+    String[] assignedPlayer(Player player,ListInterface<Player> PlayerList,int numOfPlayer){
         
       
         int length = PlayerList.getLength();
@@ -130,40 +130,7 @@ public class PlayerConnectFour {
         return round;
     }
     
-    // prompts the user for a column, repeating until a valid choice is made
-    //insert the token for symbol
-    //insert the top of height and width of the gameboard for height and width
-    //insert the board size for grid
-    //
-    public void insertToken(char symbol, Scanner input, int height, int width,char[][] grid,int lastCol,int lastTop) {
-        //to assigned token in the main before pass in to function
-        // token for current player
-        //char symbol = currentPlayers[player].charAt(0);
-     do {
-      System.out.println("\nPlayer " + symbol + " turn: ");
-      int col = input.nextInt();
-
-      // check if column is ok
-      if (!(0 <= col && col < width)) {
-        System.out.println("Column must be between 0 and " + (width - 1));
-        continue;
-      }
-
-      // now we can place the symbol to the first 
-      // available row in the asked column
-      for (int h = height - 1; h >= 0; h--) {
-        if (grid[h][col] == '.') {
-          grid[lastTop = h][lastCol = col] = symbol;
-          return;
-        }
-      }
-
-      // if column is full ==> we need to ask for a new input
-      System.out.println("Column " + col + " is full.");
-    } while (true);
-   }
-
-    void calculateAndAssignScore(double min, int tokenCount,ArrayList<Player> PlayerList, String playerName){
+    void calculateAndAssignScore(double min, int tokenCount,ListInterface<Player> PlayerList, String playerName){
         
         int length = PlayerList.getLength();
         double playerScore;
@@ -184,5 +151,19 @@ public class PlayerConnectFour {
     
     }
     
-   
+    void displayPlayerDetails(ArrayList<Player> PlayerList){
+        
+        System.out.printf("============================\n");
+        System.out.printf("     Player Details\n");
+        System.out.printf("============================\n");
+        
+        System.out.printf("===================================================================\n");
+        System.out.printf("||\t Player\t\t\tPlayer Name\t\t\tToken\t||\n");
+        for(int i = 0; i < PlayerList.getLength(); i++){
+           
+            
+            System.out.printf("||\tPlayer %d\t\t    %s\t\t\t %s\t||\n",i,PlayerList.getEntry(i).getName(),PlayerList.getEntry(i).getTokenColour());  
+        }
+        System.out.printf("===================================================================\n");
+    }
 }
