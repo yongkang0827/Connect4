@@ -7,11 +7,11 @@ package Player;
 
 /**
  *
- * @author Joan
+ * @author Joan Hau
  */
 public class token {
     
-    private String tokenColour;
+      private String tokenColour;
     private int assigned = 0;
 
     public token() {

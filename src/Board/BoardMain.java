@@ -65,8 +65,6 @@ public class BoardMain {
         
         
         
-        
-        
         //while winner appear :
         mainBoard.setTime();
         timeTaken = mainBoard.totalTimeTaken(startTime);

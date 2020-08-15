@@ -9,34 +9,24 @@ import java.util.Objects;
 
 /**
  *
- * @author Joan
+ * @author Joan Hau
  */
 public class Player {
     
     private String name;
-    private static int nextID = 1000;
-    private static int number = 0;
-    private int ID;
     private String tokenColour;
     private double score;
+    private int winner;
     token token = new token();
-    
-    public Player(int ID, String name, String tokenColour) {
-        this.ID = ID;
-        this.name = name;
-        this.tokenColour = tokenColour;
-        
-        token.setAssignedPlayer(tokenColour, 1);
-        this.ID = nextID++;
-    }
 
     public Player() {
     }
 
-    public Player(String name) {
-        this.ID = nextID++;
+    public Player(String name, String tokenColour) {
+        this.name = name;
+        this.tokenColour = tokenColour;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -45,22 +35,6 @@ public class Player {
         this.name = name;
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public static int getNextID() {
-        return nextID;
-    }
-    
-    public static void setNextID(int nextID) {
-        Player.nextID = nextID;
-    }
-    
     public String getTokenColour() {
         return tokenColour;
     }
@@ -77,33 +51,33 @@ public class Player {
         this.score = score;
     }
 
-    @Override
-    public String toString() {
-        number++;
-        return "No. "+ " " + number + " " + name + " " + ID + " " + tokenColour + " " + score + "\n";
+    public int getWinner() {
+        return winner;
+    }
+
+    public void setWinner(int winner) {
+        this.winner = winner;
+    }
+
+    public token getToken() {
+        return token;
+    }
+
+    public void setToken(token token) {
+        this.token = token;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.name);
-        hash = 41 * hash + this.ID;
-        hash = 41 * hash + Objects.hashCode(this.tokenColour);
-        hash = 41 * hash + (int) (Double.doubleToLongBits(this.score) ^ (Double.doubleToLongBits(this.score) >>> 32));
-        hash = 41 * hash + Objects.hashCode(this.token);
+        hash = 43 * hash + Objects.hashCode(this.name);
+        hash = 43 * hash + Objects.hashCode(this.tokenColour);
+        hash = 43 * hash + (int) (Double.doubleToLongBits(this.score) ^ (Double.doubleToLongBits(this.score) >>> 32));
+        hash = 43 * hash + this.winner;
+        hash = 43 * hash + Objects.hashCode(this.token);
         return hash;
     }
 
-
-    public static boolean validateName(String name) {
-        
-        String currentName = name ;
-        String regexName = "^[aA-zZ]\\w{3,29}$";
-        
-        return !(name.length() < 4 || !currentName.matches(regexName));
-    }
-    
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -116,19 +90,36 @@ public class Player {
             return false;
         }
         final Player other = (Player) obj;
-        if (!Objects.equals(this.name, other.name)) {
+        if (Double.doubleToLongBits(this.score) != Double.doubleToLongBits(other.score)) {
             return false;
         }
-        if (!Objects.equals(this.ID, other.ID)) {
+        if (this.winner != other.winner) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
         if (!Objects.equals(this.tokenColour, other.tokenColour)) {
             return false;
         }
-        if (!Objects.equals(this.score, other.score)) {
+        if (!Objects.equals(this.token, other.token)) {
             return false;
         }
         return true;
     }
+    
+    public static boolean validateName(String name) {
+        
+        String currentName = name ;
+        String regexName = "^[aA-zZ]\\w{3,29}$";
+        
+        return !(name.length() < 4 || !currentName.matches(regexName));
+    }
+
+    @Override
+    public String toString() {
+        return "name=" + name + ", tokenColour=" + tokenColour + ", score=" + score ;
+    }
+    
     
 }

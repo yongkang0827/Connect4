@@ -7,7 +7,7 @@ package Player;
 
 /**
  *
- * @author Joan
+ * @author User
  */
 
 import java.util.Arrays;
@@ -160,7 +160,7 @@ public class ConnectFour {
       //ADD THE PLAYER BEFORE START THE GAME BOARD
       //DECLARATION
       Player playerN = new Player();
-      CircularLinkedList<Player> PlayerList = new CircularLinkedList<>();
+      ArrayList<Player> PlayerList = new ArrayList<>();
       PlayerConnectFour play = new PlayerConnectFour();
       
       //GET THE NUMBER OF PLAYER AFTER ADDING ALL THE PLAYER

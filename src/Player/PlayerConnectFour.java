@@ -9,21 +9,21 @@ import java.util.Scanner;
 
 /**
  *
- * @author Joan
+ * @author User
  */
 public class PlayerConnectFour {
     
     //for testing purpose
     String addtoken(String playerName, int numOfPlayer){
          String tokenName = null;
-         CircularLinkedList<token> tokenList = new CircularLinkedList<>();
+         ArrayList<token> tokenList = new ArrayList<>();
          
          String name = Character.toString(playerName.charAt(0));
          token t1 = new token(name);
          
          tokenList.add(t1);
          
-         for (int i = 1; i < tokenList.getLength() + 1; i++){
+         for (int i = 0; i < tokenList.getLength(); i++){
             tokenName  = tokenList.getEntry(i).getTokenColour();
              
          }
@@ -31,10 +31,11 @@ public class PlayerConnectFour {
          return tokenName;
     }
     
-    int addPlayer(Player player, CircularLinkedList<Player> PlayerList){
+    int addPlayer(Player player, ArrayList<Player> PlayerList){
         
-        int numOfPlayer = 0, check = 0;
-        int nextId = Player.getNextID();
+        int numOfPlayer;
+        int check = 0;
+       
         
         Scanner scan = new Scanner(System.in);
         System.out.printf("         ==========================\n");
@@ -53,9 +54,9 @@ public class PlayerConnectFour {
             
             String playerName = scan.nextLine();
             
-            for(int j = 1; j < PlayerList.getLength() + 1; j++){
+            for(int j = 0; j < PlayerList.getLength(); j++){
                 
-                if(Character.compare(playerName.charAt(0), PlayerList.getEntry(i).getName().charAt(0)) == 0){
+                if(Character.compare(playerName.charAt(0), PlayerList.getEntry(j).getName().charAt(0)) == 0){
                     check = -1;
                 }
                 else{
@@ -67,7 +68,7 @@ public class PlayerConnectFour {
                 
                 String tokenName = addtoken(playerName, numOfPlayer);
             
-                player = new Player(nextId,playerName,tokenName);
+                player = new Player(playerName,tokenName);
             
                 PlayerList.add(player);
           
@@ -82,7 +83,7 @@ public class PlayerConnectFour {
       return numOfPlayer;
     }
     
-    String[] assignedPlayer(Player player,CircularLinkedList<Player> PlayerList,int numOfPlayer){
+    String[] assignedPlayer(Player player,ArrayList<Player> PlayerList,int numOfPlayer){
         
       
         int length = PlayerList.getLength();
@@ -91,7 +92,7 @@ public class PlayerConnectFour {
         
         String[] playerName = new String[numOfPlayer];
         
-        for(int i = 1; i < length + 1; i ++){
+        for(int i = 0; i < length; i ++){
             
             playerName[x] = PlayerList.getEntry(i).getName();
             System.out.println(PlayerList.getEntry(i).toString());
@@ -162,12 +163,12 @@ public class PlayerConnectFour {
     } while (true);
    }
 
-    void calculateAndAssignScore(double min, int tokenCount,CircularLinkedList<Player> PlayerList, String playerName){
+    void calculateAndAssignScore(double min, int tokenCount,ArrayList<Player> PlayerList, String playerName){
         
         int length = PlayerList.getLength();
         double playerScore;
         
-        for(int i = 1; i < length + 1; i++){
+        for(int i = 0; i < length; i++){
             
             if(PlayerList.getEntry(i).getName().equals(playerName)){
                 playerScore = PlayerList.getEntry(i).getScore();
@@ -184,13 +185,4 @@ public class PlayerConnectFour {
     }
     
    
-    
-    public static void main(String args[]){
-      
-        //Player player = new Player();
-        //CircularLinkedList<Player> PlayerList = new CircularLinkedList<>();
-        
-        //addPlayer(player,PlayerList);
-        
-    }
 }

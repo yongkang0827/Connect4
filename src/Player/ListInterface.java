@@ -7,18 +7,17 @@ package Player;
 
 /**
  *
- * @author Joan
+ * @author User
  */
-public interface CircularLinkedListInterface<T> {
-    
-     /**
+public interface ListInterface<T> {
+    /**
    * Task: Adds a new entry to the end of the list. Entries currently in the
    * list are unaffected. The list's size is increased by 1.
    *
    * @param newEntry the object to be added as a new entry
    * @return true if the addition is successful, or false if the list is full
    */
-  public boolean add(T newEntry); //done
+  public boolean add(T newEntry);
 
   /**
    * Task: Adds a new entry at a specified position within the list. Entries
@@ -32,26 +31,8 @@ public interface CircularLinkedListInterface<T> {
    * full, newPosition < 1, or
    *          newPosition > getLength()+1
    */
-  public boolean add(int newPosition, T newEntry); //
-  
-  /**
-   * Task: Adds a new entry to the start of the list. Entries currently in the
-   * list are unaffected. The list's size is increased by 1.
-   *
-   * @param newEntry the object to be added as a new entry
-   * @return true if the addition is successful, or false if the list is full
-   */
-   public boolean addFirst(T newEntry);
-    
-   /**
-   * Task: Adds a new entry to the end of the list. Entries currently in the
-   * list are unaffected. The list's size is increased by 1.
-   *
-   * @param newEntry the object to be added as a new entry
-   * @return true if the addition is successful, or false if the list is full
-   */
-    public boolean addLast(T newEntry);
-    
+  public boolean add(int newPosition, T newEntry);
+
   /**
    * Task: Removes the entry at a given position from the list. Entries
    * originally at positions higher than the given position are at the next
@@ -59,19 +40,12 @@ public interface CircularLinkedListInterface<T> {
    *
    * @param givenPosition an integer that indicates the position of the entry to
    * be removed
-   * @return true if the deletion is successful, or false if the deletion list is fail
+   * @return a reference to the removed entry or null, if either the list was
+   * empty, givenPosition < 1, or
+   *          givenPosition > getLength()
    */
-  public boolean remove(int givenPosition);
+  public T remove(int givenPosition);
 
-   /**
-   * Task: Removes the entry at the beginning from the list. And the list's size is decreased by 1.
-   *
-   *
-   * @return true if the deletion is successful
-   */
-   public boolean removeFirst();
-
-    
   /**
    * Task: Removes all entries from the list.
    */
@@ -88,7 +62,7 @@ public interface CircularLinkedListInterface<T> {
    * empty, givenPosition < 1, or givenPosition > getLength()
    */
   public boolean replace(int givenPosition, T newEntry);
-    
+
   /**
    * Task: Retrieves the entry at a given position in the list.
    *
@@ -100,13 +74,13 @@ public interface CircularLinkedListInterface<T> {
   public T getEntry(int givenPosition);
 
   /**
-    * Task: Retrieves the entry at a given position in the list.
-    *
-    * @param entry
-    * @return the list
-    */
-  public T getEntryByValue(T entry);
-  
+   * Task: Retrieves the entry between a given position in the list.
+   *
+   * @param start an integer that represent the first data want to retrieves
+   * @param end an integer that represent the last data want to retrieves
+   * @return a data of the list in given position
+   */
+  public String subList(int start, int end);
   /**
    * Task: Sees whether the list contains a given entry.
    *
@@ -135,5 +109,4 @@ public interface CircularLinkedListInterface<T> {
    * @return true if the list is full, or false if not
    */
   public boolean isFull();
-  
 }
