@@ -19,18 +19,20 @@ public class LinkedList<T> implements ListInterface<T> {
     
     @Override
     public boolean add(T newEntry) {
-        Node newNode = new Node(newEntry);	// create the new node
+        Node newNode = new Node(newEntry);	
 
        if (isEmpty()) {
          node = newNode;
-       } else {                        // add to end of nonempty list
-         Node currentNode = node;	// traverse linked list with p pointing to the current node
-         while (currentNode.next != null) { // while have not reached the last node
-           currentNode = currentNode.next;
-         }
-         currentNode.next = newNode; // make last node reference new node
+       } else { 
+           Node tempNode = node;
+           for(int i = 0 ; i < length; i++ ){
+              if(tempNode.next != null){ 
+                  tempNode = tempNode.next;
+              }
+           }
+           tempNode.next = newNode;
+           
        }
-
        length++;
        return true;
     }
@@ -38,21 +40,20 @@ public class LinkedList<T> implements ListInterface<T> {
     @Override
     public boolean add(int newPosition, T newEntry) {
         
-
-        if ((newPosition >= 1) && (newPosition <= length + 1)) {
+        if ((newPosition >= 0) && (newPosition < length)) {
           Node newNode = new Node(newEntry);
 
-          if (isEmpty() || (newPosition == 1)) { // case 1: add to beginning of list
+          if (isEmpty() || (newPosition == 1)) { 
             newNode.next = node;
             node = newNode;
-          } else {								// case 2: list is not empty and newPosition > 1
-            Node nodeBefore = node;
-            for (int i = 1; i < newPosition - 1; ++i) {
-              nodeBefore = nodeBefore.next;		// advance nodeBefore to its next node
+          } else {								
+            Node tempNode = node;
+            for (int i = 1; i < newPosition - 1; i++) {
+              tempNode = tempNode.next;		
             }
 
-            newNode.next = nodeBefore.next;	// make new node point to current node at newPosition
-            nodeBefore.next = newNode;		// make the node before point to the new node
+            newNode.next = tempNode.next;	
+            tempNode.next = newNode;		
           }
 
           length++;
@@ -67,82 +68,85 @@ public class LinkedList<T> implements ListInterface<T> {
     
     @Override
     public T remove(int givenPosition) {
-        T result = null;                
+        T removeValue;                
 
-        if ((givenPosition >= 1) && (givenPosition <= length)) {
-          if (givenPosition == 1) {      // case 1: remove first entry
-            result = (T) node.data;     // save entry to be removed
+        if ((givenPosition >= 0) && (givenPosition < length)) {
+          
+          if (givenPosition == 1) {      
+            removeValue = (T) node.data;     
             node = node.next;
-          } else {                         // case 2: givenPosition > 1
-            Node nodeBefore = node;
-            for (int i = 1; i < givenPosition - 1; ++i) {
-              nodeBefore = nodeBefore.next;		// advance nodeBefore to its next node
+          } else {   
+              
+            Node tempNode = node;
+            for (int i = 1; i < givenPosition - 1; i++) {
+              tempNode = tempNode.next;		
             }
-            result = (T) nodeBefore.next.data;  // save entry to be removed
-            nodeBefore.next = nodeBefore.next.next;	// make node before point to node after the
-          } 																// one to be deleted (to disconnect node from chain)
-
+            
+            removeValue = (T) tempNode.next.data;  
+            tempNode.next = tempNode.next.next;
+          } 	
           length--;
+          
+        }else{
+            return null;
         }
 
-        return result; 
+        return removeValue; 
     }
 
 
     @Override
     public final void clear() {   
-     node = null;
-     length = 0;
+        node = null;
+        length = 0;
     }
 
     
     @Override
     public boolean replace(int givenPosition, T newEntry) {
-        boolean isSuccessful = true;
-
-        if ((givenPosition >= 1) && (givenPosition <= length)) {
+       
+        if ((givenPosition >= 0) && (givenPosition < length)) {
           Node currentNode = node;
           for (int i = 0; i < givenPosition - 1; i++) {
             currentNode = currentNode.next;		// advance currentNode to next node
           }
           currentNode.data = newEntry;	// currentNode is pointing to the node at givenPosition
         } else {
-          isSuccessful = false;
+          return false;
         }
 
-        return isSuccessful;
+        return true;
     }
 
     
     @Override
     public T getEntry(int givenPosition) {
-        T result = null;
-
-        if ((givenPosition >= 1) && (givenPosition <= length)) {
+       
+        if ((givenPosition >= 0) && (givenPosition < length)) {
           Node currentNode = node;
           for (int i = 0; i < givenPosition - 1; ++i) {
-            currentNode = currentNode.next;		// advance currentNode to next node
+            currentNode = currentNode.next;		
           }
-          result = (T) currentNode.data;	// currentNode is pointing to the node at givenPosition
+          return (T) currentNode.data;	
         }
 
-        return result; 
+        return null; 
     }
 
     
     @Override
     public boolean contains(T anEntry) {
-         boolean found = false;
-        Node currentNode = node;
+       
+        Node tempNode = node;
 
-        while (!found && (currentNode != null)) {
-          if (anEntry.equals(currentNode.data)) {
-            found = true;
+        while (tempNode != null) {
+          if (anEntry.equals(tempNode.data)) {
+            return true;
           } else {
-            currentNode = currentNode.next;
+            tempNode = tempNode.next;
           }
         }
-        return found;
+        return false;
     }
 
     
@@ -153,25 +157,22 @@ public class LinkedList<T> implements ListInterface<T> {
 
     
     @Override
-    public boolean isEmpty() { // check if the specific col empty
-       
+    public boolean isEmpty() { 
         return length == 0;
     }
 
     
     @Override
     public boolean isFull() {  
-         
       return false;
     }
-    
     
     
     //---------- Node ----------//
      public class Node<T> {
 
-        private T data; // entry in list
-        private Node next; // link to next node
+        private T data; 
+        private Node next; 
 
         private Node(T data) {
           this.data = data;

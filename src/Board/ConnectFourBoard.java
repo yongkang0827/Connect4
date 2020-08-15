@@ -15,15 +15,15 @@ import java.util.Scanner;
 public class ConnectFourBoard {
     Scanner scan = new Scanner(System.in);
     
-    double time; //(calculate startime and end time)
+    double time; 
     int rows;
     int cols;
-    //Character board[][];
     LinkedList<Character> boardCol[] = new LinkedList[cols];
     int insertTokenPosition = 0;
     int turn = 1;
     boolean assignSuccess;
-    String player1, player2;// = {"Choo", "Ong"};
+    String player1, player2;
+    char token1 = 'K', token2 = 'T';
     
     public ConnectFourBoard(String player1, String player2) {
         this.player1 = player1;
@@ -41,15 +41,12 @@ public class ConnectFourBoard {
     public void createNewBoard(int rows, int cols){
         this.rows = rows;
         this.cols = cols;
-        //board = new Character[rows][cols];
         boardCol = new LinkedList[cols];
          
          for(int j = 0; j < cols; j++){
              boardCol[j] = new LinkedList();
             for(int i = 0; i < rows; i++){
                 boardCol[j].add('-');
-                
-                //board[i][j] = '-';
             }
         }
     }
@@ -63,12 +60,11 @@ public class ConnectFourBoard {
         } 
 
         //display board
-        for(int i = 1; i <= rows; i++){
+        for(int i = 0; i < rows; i++){
             System.out.print("\n");
             for(int j = 0; j < cols; j++){
                 System.out.print(boardCol[j].getEntry(i)+" ");
                 
-                //System.out.print(board[i][j]+" ");
             }
         }
         
@@ -83,7 +79,7 @@ public class ConnectFourBoard {
         }
 
         insertTokenPosition = scan.nextInt();
-
+        
         //check selected column for insert token
         if(insertTokenPosition <= 0 || insertTokenPosition> cols){
             System.out.println("Invalid column number! Pls try again...");
@@ -92,7 +88,7 @@ public class ConnectFourBoard {
             // check if col full
             int isColFull = rows;
             for(int i = 0; i < rows; i++){
-                Character entry = boardCol[insertTokenPosition-1].getEntry(rows - i);
+                Character entry = boardCol[insertTokenPosition-1].getEntry(rows - 1 - i);
                 if(entry == '-'){
                     break;
                 }else{
@@ -111,7 +107,7 @@ public class ConnectFourBoard {
     
     //--- save the token inserted position into linked list ----//
     public void assignToken(){
-        int replaceRow = rows; 
+        int replaceRow = rows - 1; 
         Character entry;
         do{
             entry = boardCol[insertTokenPosition-1].getEntry(replaceRow);
@@ -123,10 +119,10 @@ public class ConnectFourBoard {
        
             
         if(turn % 2 == 1){
-            assignSuccess = boardCol[insertTokenPosition-1].replace( replaceRow, '1');
+            assignSuccess = boardCol[insertTokenPosition-1].replace( replaceRow, token1);
                  
         }else{
-            assignSuccess = boardCol[insertTokenPosition-1].replace( replaceRow, '2');
+            assignSuccess = boardCol[insertTokenPosition-1].replace( replaceRow, token2);
         }
 
         if(assignSuccess){
@@ -141,7 +137,7 @@ public class ConnectFourBoard {
         switch (connectNum) {
                 case 3:
                     //check for horizontal win
-                    for(int i = rows ; i > 0; i--){
+                    for(int i = rows - 1 ; i > 0; i--){
                         for(int j = 0; j < cols - 2; j++){
                             entry = boardCol[j].getEntry(i);
                             
@@ -154,7 +150,7 @@ public class ConnectFourBoard {
                     
                     //check for vertical win
                     for(int j = 0; j < cols; j++){
-                        for(int i = 1; i <= rows - 2; i++){
+                        for(int i = 0; i < rows - 2; i++){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j].getEntry(i+1).equals(entry) 
@@ -165,7 +161,7 @@ public class ConnectFourBoard {
                     }   
                    
                     //check for diagonal win (+ve slope)
-                    for(int i = rows ; i >= 2; i--){
+                    for(int i = rows - 1 ; i > 2; i--){
                         for(int j = 0; j < cols - 2; j++){
                             entry = boardCol[j].getEntry(i);
                             
@@ -177,7 +173,7 @@ public class ConnectFourBoard {
                     }
                     
                     //check for diagonal win (-ve slope)
-                    for(int i = rows ; i > 0; i--){
+                    for(int i = rows - 1 ; i > 0; i--){
                         for(int j = cols - 1; j > 1; j--){
                             entry = boardCol[j].getEntry(i);
                             
@@ -191,7 +187,7 @@ public class ConnectFourBoard {
                     break;
                 case 5:
                     //check for horizontal win
-                     for(int i = rows ; i > 0; i--){
+                     for(int i = rows - 1 ; i > 0; i--){
                         for(int j = 0; j < cols - 4; j++){
                             entry = boardCol[j].getEntry(i);
                             
@@ -205,7 +201,7 @@ public class ConnectFourBoard {
                     
                     //check for vertical win
                       for(int j = 0; j < cols; j++){
-                        for(int i = 1; i <= rows - 4; i++){
+                        for(int i = 0; i < rows - 4; i++){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j].getEntry(i+1).equals(entry) 
@@ -217,7 +213,7 @@ public class ConnectFourBoard {
                     }   
                       
                     //check for diagonal win (+ve slope)
-                    for(int i = rows ; i > 3; i--){
+                    for(int i = rows - 1 ; i > 3; i--){
                         for(int j = 0; j < cols - 4; j++){
                             entry = boardCol[j].getEntry(i);
                             
@@ -230,7 +226,7 @@ public class ConnectFourBoard {
                     }
                       
                     //check for diagonal win (-ve slope)
-                     for(int i = rows ; i > 3; i--){
+                     for(int i = rows - 1 ; i > 3; i--){
                         for(int j = cols - 1; j > 3; j--){
                             entry = boardCol[j].getEntry(i);
                             
@@ -246,7 +242,7 @@ public class ConnectFourBoard {
                 default: // connect 4
                     
                     //check for horizontal win
-                    for(int i = rows ; i > 0; i--){
+                    for(int i = rows - 1 ; i >= 0; i--){
                         for(int j = 0; j < cols - 3; j++){
                             entry = boardCol[j].getEntry(i);
                             
@@ -259,7 +255,7 @@ public class ConnectFourBoard {
                     
                     //check for vertical win
                     for(int j = 0; j < cols; j++){
-                        for(int i = 1; i <= rows - 3; i++){
+                        for(int i = 0; i <= rows - 4; i++){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j].getEntry(i+1).equals(entry) 
@@ -270,7 +266,7 @@ public class ConnectFourBoard {
                     }  
                     
                     //check for diagonal win (+ve slope)
-                    for(int i = rows ; i > 2; i--){
+                    for(int i = rows - 1 ; i > 2; i--){
                         for(int j = 0; j < cols - 3; j++){
                             entry = boardCol[j].getEntry(i);
                             
@@ -281,7 +277,7 @@ public class ConnectFourBoard {
                         }
                     }
                     //check for diagonal win (-ve slope)
-                    for(int i = rows ; i > 2; i--){
+                    for(int i = rows - 1 ; i > 2; i--){
                         for(int j = cols - 1; j > 2; j--){
                             entry = boardCol[j].getEntry(i);
                             
