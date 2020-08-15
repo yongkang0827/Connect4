@@ -18,15 +18,16 @@ public class ConnectFourBoard {
     double time; //(calculate startime and end time)
     int rows;
     int cols;
-    Character board[][];
+    //Character board[][];
     LinkedList<Character> boardCol[] = new LinkedList[cols];
     int insertTokenPosition = 0;
     int turn = 1;
     boolean assignSuccess;
-    String[] player = {"Choo", "Ong"};
+    String player1, player2;// = {"Choo", "Ong"};
     
-    public ConnectFourBoard() {
-        
+    public ConnectFourBoard(String player1, String player2) {
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
     public double getTime() {
@@ -40,13 +41,15 @@ public class ConnectFourBoard {
     public void createNewBoard(int rows, int cols){
         this.rows = rows;
         this.cols = cols;
-        board = new Character[rows][cols];
+        //board = new Character[rows][cols];
         boardCol = new LinkedList[cols];
          
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < cols; j++){
-                boardCol[j] = new LinkedList();
-                board[i][j] = '-'; 
+         for(int j = 0; j < cols; j++){
+             boardCol[j] = new LinkedList();
+            for(int i = 0; i < rows; i++){
+                boardCol[j].add('-');
+                
+                //board[i][j] = '-';
             }
         }
     }
@@ -60,10 +63,12 @@ public class ConnectFourBoard {
         } 
 
         //display board
-        for(int i = 0; i < rows; i++){
+        for(int i = 1; i <= rows; i++){
             System.out.print("\n");
             for(int j = 0; j < cols; j++){
-                System.out.print(board[i][j]+" ");
+                System.out.print(boardCol[j].getEntry(i)+" ");
+                
+                //System.out.print(board[i][j]+" ");
             }
         }
         
@@ -72,53 +77,225 @@ public class ConnectFourBoard {
     public boolean insertToken(){
         
         if(turn % 2 == 1){
-            System.out.print("\n\n"+player[0] +"'s turn: ");
+            System.out.print("\n\n"+player1 +"'s turn: ");
         }else{
-            System.out.print("\n\n"+player[1] +"'s turn: ");
+            System.out.print("\n\n"+player2 +"'s turn: ");
         }
 
         insertTokenPosition = scan.nextInt();
 
+        //check selected column for insert token
         if(insertTokenPosition <= 0 || insertTokenPosition> cols){
             System.out.println("Invalid column number! Pls try again...");
             return false;
-        }
-        else if(boardCol[insertTokenPosition-1].getLength() == rows){
-            System.out.println("Col " +insertTokenPosition+" is full ! Pls proceed to another row ! ");
-            return false;
+        }else{
+            // check if col full
+            int isColFull = rows;
+            for(int i = 0; i < rows; i++){
+                Character entry = boardCol[insertTokenPosition-1].getEntry(rows - i);
+                if(entry == '-'){
+                    break;
+                }else{
+                    isColFull--;
+                }
+            } 
+            if(isColFull == 0){
+                System.out.println("Col " +insertTokenPosition+" is full ! Pls proceed to another row ! ");
+                return false;
+            }
         }
        return true;
     }
-
+    
+    
+    
     //--- save the token inserted position into linked list ----//
     public void assignToken(){
+        int replaceRow = rows; 
+        Character entry;
+        do{
+            entry = boardCol[insertTokenPosition-1].getEntry(replaceRow);
         
+            if(entry.compareTo('-') != 0){
+                replaceRow--;
+            }
+        }while(entry.compareTo('-') != 0);
+       
+            
         if(turn % 2 == 1){
-            assignSuccess = boardCol[insertTokenPosition-1].add('1');
+            assignSuccess = boardCol[insertTokenPosition-1].replace( replaceRow, '1');
                  
         }else{
-            assignSuccess = boardCol[insertTokenPosition-1].add('2');
-
+            assignSuccess = boardCol[insertTokenPosition-1].replace( replaceRow, '2');
         }
 
         if(assignSuccess){
-            for(int j = 0; j < cols; j++){
-               for(int i = rows - 1; i >= 0; i--){   
-                    Character entry = boardCol[j].getEntry(rows - i);
-                    if((entry != null) && (Character.compare(board[i][j], '-') == 0)){
-                        board[i][j] = entry;
-                    }
-                }
-            }
             turn++;
         }
     }
 
     
     //-----check win------//
-    public boolean checkResult(){
+    public int checkResult(int connectNum){
+        Character entry;
+        switch (connectNum) {
+                case 3:
+                    //check for horizontal win
+                    for(int i = rows ; i > 0; i--){
+                        for(int j = 0; j < cols - 2; j++){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j+1].getEntry(i).equals(entry) 
+                                    && boardCol[j+2].getEntry(i).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    }
+                    
+                    //check for vertical win
+                    for(int j = 0; j < cols; j++){
+                        for(int i = 1; i <= rows - 2; i++){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j].getEntry(i+1).equals(entry) 
+                                    && boardCol[j].getEntry(i+2).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    }   
+                   
+                    //check for diagonal win (+ve slope)
+                    for(int i = rows ; i >= 2; i--){
+                        for(int j = 0; j < cols - 2; j++){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j+1].getEntry(i-1).equals(entry) 
+                                    && boardCol[j+2].getEntry(i-2).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    }
+                    
+                    //check for diagonal win (-ve slope)
+                    for(int i = rows ; i > 0; i--){
+                        for(int j = cols - 1; j > 1; j--){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j-1].getEntry(i-1).equals(entry) 
+                                    && boardCol[j-2].getEntry(i-2).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    } 
+                    
+                    break;
+                case 5:
+                    //check for horizontal win
+                     for(int i = rows ; i > 0; i--){
+                        for(int j = 0; j < cols - 4; j++){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j+1].getEntry(i).equals(entry) 
+                                    && boardCol[j+2].getEntry(i).equals(entry) && boardCol[j+3].getEntry(i).equals(entry)
+                                    && boardCol[j+4].getEntry(i).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    }
+                    
+                    //check for vertical win
+                      for(int j = 0; j < cols; j++){
+                        for(int i = 1; i <= rows - 4; i++){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j].getEntry(i+1).equals(entry) 
+                                    && boardCol[j].getEntry(i+2).equals(entry) && boardCol[j].getEntry(i+3).equals(entry)
+                                    && boardCol[j].getEntry(i+4).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    }   
+                      
+                    //check for diagonal win (+ve slope)
+                    for(int i = rows ; i > 3; i--){
+                        for(int j = 0; j < cols - 4; j++){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j+1].getEntry(i-1).equals(entry) 
+                                    && boardCol[j+2].getEntry(i-2).equals(entry) && boardCol[j+3].getEntry(i-3).equals(entry)
+                                    && boardCol[j+4].getEntry(i-4).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    }
+                      
+                    //check for diagonal win (-ve slope)
+                     for(int i = rows ; i > 3; i--){
+                        for(int j = cols - 1; j > 3; j--){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j-1].getEntry(i-1).equals(entry) 
+                                    && boardCol[j-2].getEntry(i-2).equals(entry) && boardCol[j-3].getEntry(i-3).equals(entry)
+                                     && boardCol[j-4].getEntry(i-4).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    } 
+                    
+                    break;
+                default: // connect 4
+                    
+                    //check for horizontal win
+                    for(int i = rows ; i > 0; i--){
+                        for(int j = 0; j < cols - 3; j++){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j+1].getEntry(i).equals(entry) 
+                                    && boardCol[j+2].getEntry(i).equals(entry) && boardCol[j+3].getEntry(i).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    }
+                    
+                    //check for vertical win
+                    for(int j = 0; j < cols; j++){
+                        for(int i = 1; i <= rows - 3; i++){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j].getEntry(i+1).equals(entry) 
+                                    && boardCol[j].getEntry(i+2).equals(entry) && boardCol[j].getEntry(i+3).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    }  
+                    
+                    //check for diagonal win (+ve slope)
+                    for(int i = rows ; i > 2; i--){
+                        for(int j = 0; j < cols - 3; j++){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j+1].getEntry(i-1).equals(entry) 
+                                    && boardCol[j+2].getEntry(i-2).equals(entry) && boardCol[j+3].getEntry(i-3).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    }
+                    //check for diagonal win (-ve slope)
+                    for(int i = rows ; i > 2; i--){
+                        for(int j = cols - 1; j > 2; j--){
+                            entry = boardCol[j].getEntry(i);
+                            
+                            if( !(entry.equals('-')) && boardCol[j-1].getEntry(i-1).equals(entry) 
+                                    && boardCol[j-2].getEntry(i-2).equals(entry) && boardCol[j-3].getEntry(i-3).equals(entry)){
+                                return turn;
+                            }
+                        }
+                    } 
+                    
+                    break;
+            }
         
-        return true;
+            return 0;
     }
     
     //----- cal total time----//

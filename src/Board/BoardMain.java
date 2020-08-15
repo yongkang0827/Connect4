@@ -5,6 +5,8 @@
  */
 package Board;
 
+import java.util.Scanner;
+
 /**
  *
  * @author CYL
@@ -14,17 +16,26 @@ public class BoardMain {
     
     
     public static void main(String args[]) {
-        
+        Scanner scan = new Scanner(System.in);
         int rows = 9; 
         int cols = 8;
+        int connectNum = 4;
         boolean insertSuccess, assignSuccess;
-        ConnectFourBoard mainBoard = new ConnectFourBoard();
-        double startTime, timeTaken;
+        int checkResult; // win will get turn else 0
         
+        double startTime, timeTaken;
+        char newRound;
+        String currentPlayer[] = {"Choo", "Ong"};
+        String winner;
+        
+        do{
+        ConnectFourBoard mainBoard = new ConnectFourBoard(currentPlayer[0], currentPlayer[1]);
         mainBoard.createNewBoard(rows, cols);
         mainBoard.setTime();
         startTime = mainBoard.getTime();
         
+       
+            
         do{
             mainBoard.displayBoard();
             
@@ -35,6 +46,21 @@ public class BoardMain {
 
             mainBoard.assignToken();
             
+            if(insertSuccess){
+               checkResult = mainBoard.checkResult(connectNum);
+                
+               if(checkResult != 0){
+                   if(checkResult %2 == 0){
+                       winner = currentPlayer[0];
+                   }else{
+                       winner = currentPlayer[1];
+                   }
+                   mainBoard.displayBoard();
+                   System.out.println("\nWinner is "+ winner.toUpperCase());
+                   break;
+               }
+            }
+            
         }while(insertSuccess);
         
         
@@ -44,8 +70,15 @@ public class BoardMain {
         //while winner appear :
         mainBoard.setTime();
         timeTaken = mainBoard.totalTimeTaken(startTime);
-        System.out.println(" min: "+ timeTaken);
+        System.out.println("\n min: "+ timeTaken);
            
         
+        
+        //prompt to start a new round and get new board
+         System.out.println("Start another round? >> ");
+         String startNewRound = scan.nextLine();
+         newRound = startNewRound.toLowerCase().charAt(0);
+         
+        }while(newRound == 'y');
     }
 }
