@@ -79,7 +79,11 @@ public class ConnectFourBoard {
         }
 
         String selectCol = scan.nextLine();
-         
+        
+         if(selectCol.compareTo("") == 0){
+            System.out.println("Pls enter a column number ...");
+            return false;
+        }
         char selectedCol = selectCol.charAt(0);
         
         if(Character.isDigit(selectedCol)){
