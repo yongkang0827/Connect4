@@ -35,8 +35,10 @@ public class BoardMain {
         boolean insertSuccess, assignSuccess;
         int checkResult; // win will get turn else 0
         
+        
         double startTime, timeTaken;
         String currentPlayer[];
+        char currentToken[] = {'K', 'T'};
         
         String winner;
 
@@ -48,7 +50,7 @@ public class BoardMain {
 
         currentPlayer = play.retrievePlayerForEachRound(PlayerList, winnerList,round);
         System.out.println(currentPlayer[0] + " >> "+ currentPlayer[1]);
-        ConnectFourBoard mainBoard = new ConnectFourBoard(currentPlayer[0], currentPlayer[1]);
+        ConnectFourBoard mainBoard = new ConnectFourBoard(currentPlayer, currentToken);
         mainBoard.createNewBoard(rows, cols);
         mainBoard.setTime();
         startTime = mainBoard.getTime();

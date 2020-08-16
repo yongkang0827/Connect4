@@ -7,6 +7,7 @@ package Board;
 
 /**
  * @author Cheong Yin Lam
+ * @param <T>
  */
 public class LinkedList<T> implements ListInterface<T> {
 

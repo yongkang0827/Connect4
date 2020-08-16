@@ -22,12 +22,12 @@ public class ConnectFourBoard {
     int insertTokenPosition = 0;
     int turn = 1;
     boolean assignSuccess;
-    String player1, player2;
-    char token1 = 'K', token2 = 'T';
+    String currentPlayer[] = new String[2];
+    char currentToken[] = new char[2]; 
     
-    public ConnectFourBoard(String player1, String player2) {
-        this.player1 = player1;
-        this.player2 = player2;
+    public ConnectFourBoard(String player[], char tokenChar[]) {
+        this.currentPlayer = player;
+        this.currentToken = tokenChar;
     }
 
     public double getTime() {
@@ -73,9 +73,9 @@ public class ConnectFourBoard {
     public boolean insertToken(){
         
         if(turn % 2 == 1){
-            System.out.print("\n\n"+player1 +"'s turn: ");
+            System.out.print("\n\n"+currentPlayer[0] +"'s turn: ");
         }else{
-            System.out.print("\n\n"+player2 +"'s turn: ");
+            System.out.print("\n\n"+currentPlayer[1] +"'s turn: ");
         }
 
         insertTokenPosition = scan.nextInt();
@@ -119,10 +119,10 @@ public class ConnectFourBoard {
        
             
         if(turn % 2 == 1){
-            assignSuccess = boardCol[insertTokenPosition-1].replace( replaceRow, token1);
+            assignSuccess = boardCol[insertTokenPosition-1].replace( replaceRow, currentToken[0]);
                  
         }else{
-            assignSuccess = boardCol[insertTokenPosition-1].replace( replaceRow, token2);
+            assignSuccess = boardCol[insertTokenPosition-1].replace( replaceRow, currentToken[1]);
         }
 
         if(assignSuccess){
