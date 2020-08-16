@@ -118,7 +118,7 @@ public class Player implements Comparable<Player>{
     
     @Override
     public int compareTo(Player player){
-        return (int)(this.score - player.score);
+        return (int)((this.score - player.score)*100);
     }
     
     public void clone(Player player){
