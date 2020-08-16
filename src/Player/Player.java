@@ -27,6 +27,10 @@ public class Player {
         this.tokenColour = tokenColour;
     }
 
+    public Player(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

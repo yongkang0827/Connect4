@@ -13,8 +13,9 @@ import java.util.Scanner;
  */
 public class PlayerConnectFour {
     
+    //public static int round = 1;
     //for testing purpose
-    String addtoken(String playerName, int numOfPlayer){
+    public String addtoken(String playerName, int numOfPlayer){
          String tokenName = null;
          ArrayList<token> tokenList = new ArrayList<>();
          
@@ -31,7 +32,7 @@ public class PlayerConnectFour {
          return tokenName;
     }
     
-    int addPlayer(Player player, ListInterface<Player> PlayerList){
+    public int addPlayer(Player player, ListInterface<Player> PlayerList){
         
         int numOfPlayer;
         int check = 0;
@@ -42,9 +43,13 @@ public class PlayerConnectFour {
         System.out.printf("             Player Registration\n");
         System.out.printf("         ==========================\n");
         
-        System.out.printf("Please Enter The Number Of Player For This Round:   ");
-        numOfPlayer = scan.nextInt();
- 
+        do{
+            
+            System.out.printf("Please Enter The Number Of Player For This Round:   ");
+            numOfPlayer = scan.nextInt();
+            
+        }while(numOfPlayer < 2);
+     
         System.out.printf("\nPlease Enter The Player Name:    \n\n");
         scan.nextLine();
         
@@ -83,7 +88,7 @@ public class PlayerConnectFour {
       return numOfPlayer;
     }
     
-    String[] assignedPlayer(Player player,ListInterface<Player> PlayerList,int numOfPlayer){
+    public String[] assignedPlayer(Player player,ListInterface<Player> PlayerList,int numOfPlayer){
         
       
         int length = PlayerList.getLength();
@@ -95,42 +100,44 @@ public class PlayerConnectFour {
         for(int i = 0; i < length; i ++){
             
             playerName[x] = PlayerList.getEntry(i).getName();
-            System.out.println(PlayerList.getEntry(i).toString());
             x++;
         }
         
         return playerName;
     }
     
-    String[] retrievePlayerForEachRound(String[] players,String[] winner,int round){
+    public String[] retrievePlayerForEachRound(ListInterface<Player> PlayerList,ListInterface<Player> winnerList,int round){
         
         String [] playerName = new String[2];
-        int length = winner.length;
+        int length = winnerList.getLength();
         
+      
+       
+      
         if(length == 0 && round == 1){
             
-            playerName[0] = players[0];
-            playerName[1] = players[1];
+            playerName[0] = PlayerList.getEntry(0).getName();
+            playerName[1] = PlayerList.getEntry(1).getName();
             
         }
         else if (length > 0 && round > 1){
-            
-            playerName[0] = winner[length - 1];
-            playerName[1] = players[length + 1];
+           
+            playerName[0] = winnerList.getEntry(length - 1).getName();
+            playerName[1] = PlayerList.getEntry(length + 1).getName();
  
         }
         
         return playerName;
     }
     
-    int getNumberofRoundInAGame(int numOfPlayer){
+    public int getNumberofRoundInAGame(int numOfPlayer){
         
         int round = numOfPlayer - 1;
         
         return round;
     }
     
-    void calculateAndAssignScore(double min, int tokenCount,ListInterface<Player> PlayerList, String playerName){
+    public void calculateAndAssignScore(double min, int tokenCount,ListInterface<Player> PlayerList, String playerName){
         
         int length = PlayerList.getLength();
         double playerScore;
@@ -151,19 +158,19 @@ public class PlayerConnectFour {
     
     }
     
-    void displayPlayerDetails(ArrayList<Player> PlayerList){
+    public void displayPlayerDetails(ListInterface<Player> PlayerList){
         
-        System.out.printf("============================\n");
-        System.out.printf("     Player Details\n");
-        System.out.printf("============================\n");
+        System.out.printf("\t\t\t============================\n");
+        System.out.printf("\t\t\t     Player Details\n");
+        System.out.printf("\t\t\t============================\n");
         
-        System.out.printf("===================================================================\n");
+        System.out.printf("=========================================================================\n");
         System.out.printf("||\t Player\t\t\tPlayer Name\t\t\tToken\t||\n");
         for(int i = 0; i < PlayerList.getLength(); i++){
            
             
             System.out.printf("||\tPlayer %d\t\t    %s\t\t\t %s\t||\n",i,PlayerList.getEntry(i).getName(),PlayerList.getEntry(i).getTokenColour());  
         }
-        System.out.printf("===================================================================\n");
+        System.out.printf("=========================================================================\n");
     }
 }

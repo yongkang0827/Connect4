@@ -160,7 +160,7 @@ public class ConnectFour {
       //ADD THE PLAYER BEFORE START THE GAME BOARD
       //DECLARATION
       Player playerN = new Player();
-      ArrayList<Player> PlayerList = new ArrayList<>();
+      ListInterface<Player> PlayerList = new ArrayList<>();
       PlayerConnectFour play = new PlayerConnectFour();
       
       //GET THE NUMBER OF PLAYER AFTER ADDING ALL THE PLAYER
@@ -188,7 +188,7 @@ public class ConnectFour {
      do{  
        try (Scanner input = new Scanner(System.in)) {
         
-       currentPlayers = play.retrievePlayerForEachRound(allPlayers, winner, round);
+      // currentPlayers = play.retrievePlayerForEachRound(allPlayers, winner, round);
        
        System.out.println(Arrays.toString(currentPlayers));
       // we define some variables for our game like 
