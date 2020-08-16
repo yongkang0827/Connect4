@@ -145,7 +145,8 @@ public class BoardMain {
 
     public static int setConnectNum(){
         Scanner scan = new Scanner(System.in);
-        char selectConnectNum;
+        char selectConnectNum = 2;
+        boolean validSelection = true;
         
         do{
             System.out.println("\n Connect Number Mode   ");
@@ -156,15 +157,27 @@ public class BoardMain {
             System.out.print(" Pls enter the mode number (1/2/3) : ");
             String selection = scan.nextLine();
 
-            selectConnectNum = selection.charAt(0);
+            if(selection.compareTo("") == 0){
+                System.out.println("Pls enter a mode slection ...");
+               validSelection = false;
+               
+            }else{
+                selectConnectNum = selection.charAt(0);
             
-            if(!Character.isDigit(selectConnectNum)){
-                System.out.println("\nNOT A NUMBER ! ");
-            }else if( Character.getNumericValue(selectConnectNum) < 1 || Character.getNumericValue(selectConnectNum) > 3){
-                System.out.println("\nInvalid Selection ! Must 1 / 2 / 3 ... ");
+                if(!Character.isDigit(selectConnectNum)){
+                    System.out.println("\nNOT A NUMBER ! ");
+                    validSelection = false;
+                }else if( Character.getNumericValue(selectConnectNum) < 1 || Character.getNumericValue(selectConnectNum) > 3){
+                    System.out.println("\nInvalid Selection ! Must 1 / 2 / 3 ... ");
+                    validSelection = false;
+                }else{
+                    validSelection = true;
+                }
             }
             
-        }while( !Character.isDigit(selectConnectNum) || Character.getNumericValue(selectConnectNum) < 1 || Character.getNumericValue(selectConnectNum) > 3);
+            
+            
+        }while( !validSelection);
         
         switch(Character.getNumericValue(selectConnectNum)){
             case 1:
