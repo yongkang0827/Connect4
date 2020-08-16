@@ -50,6 +50,7 @@ public class Player implements Comparable<Player>{
     public double getScore() {
         return score;
     }
+    
 
     public void setScore(double score) {
         this.score = score;

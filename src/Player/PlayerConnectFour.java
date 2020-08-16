@@ -6,7 +6,9 @@
 package Player;
 
 import java.util.Scanner;
-import token.*;
+import token.CircularLinkedList;
+import token.Token;
+import token.TokenCount;
 
 /**
  *
@@ -149,11 +151,12 @@ public class PlayerConnectFour {
             
             if(PlayerList.getEntry(i).getName().equals(playerName)){
                 playerScore = PlayerList.getEntry(i).getScore();
+                double score = (double) min/tokenCount;
                 
                  if(playerScore == 0){
-                     
-                        double score = (double) min/tokenCount;
-                        
+                        PlayerList.getEntry(i).setScore(score);
+                 }else{
+                        score += PlayerList.getEntry(i).getScore();
                         PlayerList.getEntry(i).setScore(score);
                  }
             }

@@ -10,6 +10,8 @@ import Player.Player;
 import Player.PlayerConnectFour;
 import java.util.Scanner;
 import Player.ListInterface;
+import Ranking.Ranking;
+import Ranking.SortedLinkedList;
 import java.io.IOException;
 import token.*;
 
@@ -26,6 +28,7 @@ public class BoardMain {
         ListInterface<Player> PlayerList = new ArrayList<>();
         ListInterface<Player> winnerList = new ArrayList<>();
         PlayerConnectFour play = new PlayerConnectFour();
+        SortedLinkedList<Player> sortedPlayerList = new SortedLinkedList<>();
         CircularLinkedList<Token> CirStr = new CircularLinkedList<>();
         TokenCount token = new TokenCount();        /////////////
        
@@ -40,6 +43,7 @@ public class BoardMain {
         int turn = 0;
         
         double startTime, timeTaken;
+        double totalTime = 0; // total time for all round
         String currentPlayer[];
         char currentToken[] = {'K', 'T'};
         
@@ -93,6 +97,7 @@ public class BoardMain {
                         Player playerW = new Player();
                         mainBoard.setTime();
                         timeTaken = mainBoard.totalTimeTaken(startTime);
+                        totalTime += timeTaken;
                         play.calculateAndAssignScore(timeTaken,CirStr.getEntry(1).getCount(),PlayerList,currentPlayer[0]);
                         playerW.setName(currentPlayer[0]);
                         winnerList.add(playerW);
@@ -103,6 +108,7 @@ public class BoardMain {
                         Player playerW = new Player();
                         mainBoard.setTime();
                         timeTaken = mainBoard.totalTimeTaken(startTime);
+                        totalTime += timeTaken;
                         play.calculateAndAssignScore(timeTaken,CirStr.getEntry(2).getCount(),PlayerList,currentPlayer[1]);
                         playerW.setName(currentPlayer[1]);
                         winnerList.add(playerW);
@@ -127,5 +133,15 @@ public class BoardMain {
         
         }while(round <= play.getNumberofRoundInAGame(numOfPlayer));
         
+        for(int i = 0; i < PlayerList.getLength(); i++){
+            Player temp = new Player();
+            temp.clone(PlayerList.getEntry(i));
+            sortedPlayerList.add(temp);
+           //sortedPlayerList.add(playerList.getEntry(i));
+            //System.out.println(sortedPlayerList.getEntry(i).getName());
+        }
+        
+        Ranking ranking = new Ranking(sortedPlayerList, totalTime);
+        ranking.displayRanking();
     }
 }

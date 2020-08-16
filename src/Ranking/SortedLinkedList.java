@@ -5,6 +5,8 @@
  */
 package Ranking;
 
+import Board.LinkedList;
+
 /**
  *
  * @author Lee Ling
@@ -43,11 +45,26 @@ public class SortedLinkedList <T extends Comparable<T>> implements SortedListInt
 
     @Override
     public boolean remove(T anEntry) {
-        /*if (isEmpty()) {
-            throw new RuntimeException("List is empty...");
-        }else{
-            
-        }*/
+      /*  Node previous = firstNode;
+        Node currentNode = firstNode.next;
+        
+        while (currentNode != null) {
+            T dataOld = currentNode.data;
+            if ((dataOld == null && anEntry == null) || (dataOld != null && dataOld.equals(anEntry))) {
+                Node afterRemoved = current.getNext();
+                previous.setNext(afterRemoved);
+                if (afterRemoved == null) { // i.e. removing last element
+                    last = previous;
+                }
+                size--;
+                return true;
+            } else {
+                previous = currentNode;
+                currentNode = currentNode.next;
+            }
+        }
+        return false;*/
+  
         throw new UnsupportedOperationException();	// Left as Practical exercise
     }
 
