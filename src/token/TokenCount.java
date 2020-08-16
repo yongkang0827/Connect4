@@ -24,28 +24,28 @@ public class TokenCount {
         do{          
             symbol = scan.next().charAt(0);
             
-        }while(!validate(symbol));
+        }while(!validate(symbol, cirStr));
         
         Token tokName = new Token(nam, symbol, zero);
 
         cirStr.add(tokName);
     }
     
-    public boolean validate(char symbol){
+    public boolean validate(char symbol, CircularLinkedList<Token> cirStr){     
         if((symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z')){
+            for(int i = 1; i < cirStr.getLength() + 1; i++){ 
+                if(cirStr.getEntry(i).getToken() == symbol){
+                    System.out.println("\n\nError Detected! Please Enter Symbol that have not choose before\n");
+                    System.out.printf("\nPlease enter symbol (alphabet) : ");    
+                    return false;
+                }
+            }
             return true;
         }
-        System.out.printf("\nPlease enter symbol (alphabet) : ");
+        System.out.println("\n\nError Detected! Please Enter Alphabet\n");
+        System.out.printf("\nPlease reenter symbol (alphabet) : ");
         return false;
     }
-        
-    /*public void addAllRoundToken(String nam, CircularLinkedList<Token> cirStr){       
-        for(int i = 1; i < cirStr.getLength() + 1; i++){  
-            if(cirStr.getEntry(i).getName().equals(nam)){                
-                cirStr.getEntry(i).setAllCount(cirStr.getEntry(i).getAllCount() + cirStr.getEntry(i).getCount());
-            }
-        }    
-    }*/
        
     public void addEachRoundToken(String nam, CircularLinkedList<Token> cirStr){    
        for(int i = 1; i < cirStr.getLength() + 1; i++){          
@@ -63,28 +63,11 @@ public class TokenCount {
         for(int i = 1; i < cirStr.getLength() + 1; i++){          
            if(cirStr.getEntry(i).getCount() != 0){  
                System.out.printf("|| %s : %d token\n", cirStr.getEntry(i).getName(), cirStr.getEntry(i).getCount());
-               
-               //addAllRoundToken(cirStr.getEntry(i).getName(), cirStr);
-               
-               //cirStr.getEntry(i).setCount(0);
            }
        }
        System.out.printf("==============================================\n");
     }
-    
-    /*public void finishAllRound(CircularLinkedList<Token> cirStr){
-        System.out.println("\n\nTotal token of each player used\n");
-        
-        for(int i = 1; i < cirStr.getLength() + 1; i++){          
-           if(cirStr.getEntry(i).getAllCount() != 0){  
-               System.out.println(cirStr.getEntry(i).getName() + " : " + cirStr.getEntry(i).getToken() + " = " + cirStr.getEntry(i).getAllCount());
-                
-               cirStr.getEntry(i).setAllCount(0);
-           }
-       }
-    }*/
-    
-    
+      
     public char retrieveToken(String nam, CircularLinkedList<Token> cirStr){
         char a = '0';
         for(int i = 1; i < cirStr.getLength() + 1; i++){  
