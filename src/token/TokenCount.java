@@ -19,7 +19,7 @@ public class TokenCount {
         
         Scanner scan = new Scanner(System.in);
         
-        System.out.printf("\n" + nam + ", please enter token of your symbol(between a to z) : ");
+        System.out.printf("\n" + nam + ", please enter token of your symbol(alphabet) : ");
         
         do{          
             symbol = scan.next().charAt(0);

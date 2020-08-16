@@ -115,15 +115,13 @@ public class ConnectFourBoard {
    
     //--- save the token inserted position into linked list ----//
     public void assignToken(){
-        int replaceRow = rows - 1; 
+        int replaceRow = rows; 
         Character entry;
         do{
+            replaceRow--;
             entry = boardCol[insertTokenPosition-1].getEntry(replaceRow);
         
-            if(entry.compareTo('-') != 0){
-                replaceRow--;
-            }
-        }while(entry.compareTo('-') != 0);
+        }while(entry != '-');
        
             
         if(turn % 2 == 1){
