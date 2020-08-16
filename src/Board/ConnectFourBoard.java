@@ -78,7 +78,17 @@ public class ConnectFourBoard {
             System.out.print("\n\n"+currentPlayer[1] +"'s turn: ");
         }
 
-        insertTokenPosition = scan.nextInt();
+        String selectCol = scan.nextLine();
+         
+        char selectedCol = selectCol.charAt(0);
+        
+        if(Character.isDigit(selectedCol)){
+            insertTokenPosition = Character.getNumericValue(selectedCol);
+        }else{
+            System.out.println("Invalid NUMBER ! \n\nPls try again...");
+            return false;
+        }
+
         
         //check selected column for insert token
         if(insertTokenPosition <= 0 || insertTokenPosition> cols){
