@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author Joan Hau
  */
-public class Player {
+public class Player implements Comparable<Player>{
     
     private String name;
     private String tokenColour;
@@ -113,6 +113,18 @@ public class Player {
     @Override
     public String toString() {
         return "name=" + name + ", tokenColour=" + tokenColour + ", score=" + score ;
+    }
+    
+    @Override
+    public int compareTo(Player player){
+        return (int)(this.score - player.score);
+    }
+    
+    public void clone(Player player){
+        this.name = player.name;
+        this.score = player.score;
+        this.tokenColour = player.tokenColour;
+        this.winner = player.winner;
     }
     
     
