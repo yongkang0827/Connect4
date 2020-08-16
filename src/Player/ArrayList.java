@@ -68,29 +68,36 @@ public class ArrayList<T> implements ListInterface<T> {
     @Override
     public T getEntry(int givenPosition){
        
-     
-       if(givenPosition < 0 || givenPosition >= size){
+     if(!isEmpty()){
+          if(givenPosition < 0 || givenPosition >= size){
            return null;
        }
        else{
            return arr[givenPosition];
        }
-       
+     }
+      
+     return null;
    }
   
     @Override
     public T remove(int givenPosition){
        
-       if(givenPosition < 0 || givenPosition >= size){
+        if(!isEmpty()){
+             if(givenPosition < 0 || givenPosition >= size){
            return null;
        }
       
-       T returnEntry = arr[givenPosition];
+         T returnEntry = arr[givenPosition];
        
-       removeGap(givenPosition);
+         removeGap(givenPosition);
        
-       size--;
-       return returnEntry;
+         size--;
+         return returnEntry;
+        }
+      
+       return null;
+       
    }
    
     @Override
@@ -101,18 +108,29 @@ public class ArrayList<T> implements ListInterface<T> {
     @Override
     public boolean replace(int givenPosition, T newEntry){
        
-       if(givenPosition < 0 || givenPosition >= size){
-           return false;
-       }
-       else{
-           arr[givenPosition] = newEntry;
-           return true;
-       }
+        if(!isEmpty()){
+            if(givenPosition < 0 || givenPosition >= size){
+                return false;
+            }
+            else{
+                arr[givenPosition] = newEntry;
+                return true;
+            }
+        }
+        return false;
+       
    }
    
     @Override
     public String subList(int start, int end){
         
+        if(isEmpty()){
+            return null;
+        }
+        
+        if(start < 0 || start >= size || end < 0 || end >= size || end < start){
+            return null;
+        }
         String str = "";
         
         for(int i = start; i <= end; i++){
@@ -207,24 +225,4 @@ public class ArrayList<T> implements ListInterface<T> {
         }
     }
     
-    public static void main(String[] args){
-        ArrayList<Player> player = new ArrayList<>();
-        
-        Player p1 = new Player("J","0");
-        Player p2 = new Player("o","1");
-        Player p3 = new Player("a","2");
-        Player p4 = new Player("n","3");
-        Player p5 = new Player("H","4");
-        
-        player.add(p1);
-        player.add(p2);
-        player.add(p3);
-        player.add(p4);
-        player.add(p5);
-        
-        for(int i = 0; i < player.getLength();i++){
-            System.out.println(player.getEntry(i).toString());
-        }
-        
-    }
 }

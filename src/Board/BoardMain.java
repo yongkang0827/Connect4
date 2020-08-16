@@ -136,8 +136,6 @@ public class BoardMain {
             Player temp = new Player();
             temp.clone(PlayerList.getEntry(i));
             sortedPlayerList.add(temp);
-           //sortedPlayerList.add(playerList.getEntry(i));
-            //System.out.println(sortedPlayerList.getEntry(i).getName());
         }
         
         Ranking ranking = new Ranking(sortedPlayerList, totalTime);
@@ -147,7 +145,7 @@ public class BoardMain {
     public static int setConnectNum(){
         Scanner scan = new Scanner(System.in);
         char selectConnectNum = 2;
-        boolean validSelection = true;
+        boolean validSelection;
         
         do{
             System.out.println("\n Connect Number Mode   ");

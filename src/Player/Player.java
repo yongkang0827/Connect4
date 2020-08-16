@@ -14,17 +14,16 @@ import java.util.Objects;
 public class Player implements Comparable<Player>{
     
     private String name;
-    private String tokenColour;
+    private char token;
     private double score;
-    private int winner;
     
 
     public Player() {
     }
 
-    public Player(String name, String tokenColour) {
+    public Player(String name, char token) {
         this.name = name;
-        this.tokenColour = tokenColour;
+        this.token = token;
     }
 
     public Player(String name) {
@@ -39,12 +38,12 @@ public class Player implements Comparable<Player>{
         this.name = name;
     }
 
-    public String getTokenColour() {
-        return tokenColour;
+    public char getToken() {
+        return token;
     }
 
-    public void setTokenColour(String tokenColour) {
-        this.tokenColour = tokenColour;
+    public void setToken(char token) {
+        this.token = token;
     }
 
     public double getScore() {
@@ -56,22 +55,13 @@ public class Player implements Comparable<Player>{
         this.score = score;
     }
 
-    public int getWinner() {
-        return winner;
-    }
-
-    public void setWinner(int winner) {
-        this.winner = winner;
-    }
-
 
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 43 * hash + Objects.hashCode(this.name);
-        hash = 43 * hash + Objects.hashCode(this.tokenColour);
+        hash = 43 * hash + Objects.hashCode(this.token);
         hash = 43 * hash + (int) (Double.doubleToLongBits(this.score) ^ (Double.doubleToLongBits(this.score) >>> 32));
-        hash = 43 * hash + this.winner;
         return hash;
     }
 
@@ -90,13 +80,10 @@ public class Player implements Comparable<Player>{
         if (Double.doubleToLongBits(this.score) != Double.doubleToLongBits(other.score)) {
             return false;
         }
-        if (this.winner != other.winner) {
-            return false;
-        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.tokenColour, other.tokenColour)) {
+        if (!Objects.equals(this.token, other.token)) {
             return false;
         }
       
@@ -106,14 +93,14 @@ public class Player implements Comparable<Player>{
     public static boolean validateName(String name) {
         
         String currentName = name ;
-        String regexName = "^[aA-zZ]\\w{3,29}$";
+        String regexName = "^[aA-zZ]\\w{2,29}$";
         
-        return !(name.length() < 4 || !currentName.matches(regexName));
+        return !(name.length() < 2 || !currentName.matches(regexName));
     }
 
     @Override
     public String toString() {
-        return "name=" + name + ", tokenColour=" + tokenColour + ", score=" + score ;
+        return "name=" + name + ", tokenColour=" + token + ", score=" + score ;
     }
     
     @Override
@@ -124,8 +111,7 @@ public class Player implements Comparable<Player>{
     public void clone(Player player){
         this.name = player.name;
         this.score = player.score;
-        this.tokenColour = player.tokenColour;
-        this.winner = player.winner;
+        this.token = player.token;
     }
     
     

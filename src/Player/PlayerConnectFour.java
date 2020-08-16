@@ -16,30 +16,13 @@ import token.TokenCount;
  */
 public class PlayerConnectFour {
     
-    //public static int round = 1;
-    //for testing purpose
-    public String addtoken(String playerName, int numOfPlayer){
-         String tokenName = null;
-         ArrayList<token> tokenList = new ArrayList<>();
-         
-         String name = Character.toString(playerName.charAt(0));
-         token t1 = new token(name);
-         
-         tokenList.add(t1);
-         
-         for (int i = 0; i < tokenList.getLength(); i++){
-            tokenName  = tokenList.getEntry(i).getTokenColour();
-             
-         }
-         
-         return tokenName;
-    }
+
     
     public int addPlayer(Player player, ListInterface<Player> PlayerList, CircularLinkedList<Token> CirStr){
         
         int numOfPlayer;
         int check = 0;
-       
+        String playerName = "";
         
         Scanner scan = new Scanner(System.in);
         System.out.printf("         ==========================\n");
@@ -53,43 +36,54 @@ public class PlayerConnectFour {
             
         }while(numOfPlayer < 2);
      
-        System.out.printf("\nPlease Enter The Player Name:    \n");
-        scan.nextLine();
+        do{
+            System.out.printf("\nPlease Enter The Player Name:    \n");
+            scan.nextLine();
         
-        for(int i = 0; i < numOfPlayer; i++){
+            for(int i = 0; i < numOfPlayer; i++){
            
-            System.out.printf("\nPlayer%2d Name:    ", i+1);
+                System.out.printf("\nPlayer%2d Name:    ", i+1);
             
-            String playerName = scan.nextLine();
+                playerName = scan.nextLine();
             
-            for(int j = 0; j < PlayerList.getLength(); j++){
+                for(int j = 0; j < PlayerList.getLength(); j++){
                 
-                if(Character.compare(playerName.charAt(0), PlayerList.getEntry(j).getName().charAt(0)) == 0){
-                    check = -1;
+                    if(Character.compare(playerName.charAt(0), PlayerList.getEntry(j).getName().charAt(0)) == 0){
+                        check = -1;
+                    }
+                    else{
+                        check = 0;
+                    }
                 }
-                else{
-                    check = 0;
-                }
-            }
             
-            if(Player.validateName(playerName) && check == 0){
+                if(Player.validateName(playerName) && check == 0){
                 
-                String tokenName = addtoken(playerName, numOfPlayer);
             
-                player = new Player(playerName,tokenName);
+                    player = new Player(playerName);
             
-                PlayerList.add(player);
+                    PlayerList.add(player);
           
-                TokenCount tok = new TokenCount();
-                char symbol = 'a';
-                tok.addPlayer(playerName, symbol, CirStr);           
-            }
-            else if (-1 == check || !Player.validateName(playerName)){
-                i--;
-                System.out.println("\nError Detected! Please Enter Again");
-            }
-           
-        }
+                    TokenCount tok = new TokenCount();
+                    char symbol = 'a';
+                    tok.addPlayer(playerName, symbol, CirStr);   
+                
+                    for(int j = 0; j < PlayerList.getLength(); j++){
+                   
+                        if(PlayerList.getEntry(j).equals(player)){
+                            PlayerList.getEntry(j).setToken(CirStr.getEntry(j + 1).getToken());
+                        }
+                    }
+                    
+                }
+                else if (-1 == check || !Player.validateName(playerName)){
+                    i--;
+                    System.out.println("\nError Detected! Please Enter Again");
+                }
+            
+                
+            }  
+        }while("".equals(playerName));  
+        
       return numOfPlayer;
     }
     
@@ -175,7 +169,7 @@ public class PlayerConnectFour {
         for(int i = 0; i < PlayerList.getLength(); i++){
            
             
-            System.out.printf("||\tPlayer %d\t\t    %s\t\t\t %c\t||\n",i,PlayerList.getEntry(i).getName(),CirStr.getEntry(i + 1).getToken());  
+            System.out.printf("||\tPlayer %d\t\t    %s\t\t\t %c\t||\n",i,PlayerList.getEntry(i).getName(),PlayerList.getEntry(i).getToken());  
         }
         System.out.printf("=========================================================================\n");
     }

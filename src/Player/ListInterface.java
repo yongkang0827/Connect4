@@ -28,8 +28,8 @@ public interface ListInterface<T> {
    * new entry
    * @param newEntry the object to be added as a new entry
    * @return true if the addition is successful, or false if either the list is
-   * full, newPosition < 1, or
-   *          newPosition > getLength()+1
+   * full, newPosition < 0, or
+   *          newPosition > getLength()
    */
   public boolean add(int newPosition, T newEntry);
 
@@ -41,7 +41,7 @@ public interface ListInterface<T> {
    * @param givenPosition an integer that indicates the position of the entry to
    * be removed
    * @return a reference to the removed entry or null, if either the list was
-   * empty, givenPosition < 1, or
+   * empty, givenPosition < 0, or
    *          givenPosition > getLength()
    */
   public T remove(int givenPosition);
