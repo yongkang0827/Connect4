@@ -112,9 +112,7 @@ public class ConnectFourBoard {
         }
        return true;
     }
-    
-    
-    
+   
     //--- save the token inserted position into linked list ----//
     public void assignToken(){
         int replaceRow = rows - 1; 
@@ -302,6 +300,20 @@ public class ConnectFourBoard {
             }
         
             return 0;
+    }
+    
+    
+    //---- check if all col full ---//
+    public boolean isAllColFull(){
+        
+        for(int j = 0; j < cols; j++){
+            for(int i = 0; i < rows; i++){
+                if( boardCol[j].getEntry(i) == '-'){
+                    return false;
+            } 
+         }
+        }
+          return true;
     }
     
     //----- cal total time----//

@@ -32,10 +32,10 @@ public class TokenCount {
     }
     
     public boolean validate(char symbol){
-        if(symbol >= 'a' && symbol <= 'z'){
+        if((symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z')){
             return true;
         }
-        System.out.printf("\nPlease enter symbol (between a - z) : ");
+        System.out.printf("\nPlease enter symbol (alphabet) : ");
         return false;
     }
         

@@ -8,11 +8,9 @@ package Board;
 import Player.ArrayList;
 import Player.Player;
 import Player.PlayerConnectFour;
-import java.util.Scanner;
 import Player.ListInterface;
 import Ranking.Ranking;
 import Ranking.SortedLinkedList;
-import java.io.IOException;
 import token.*;
 
 /**
