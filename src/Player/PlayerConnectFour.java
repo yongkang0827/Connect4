@@ -6,6 +6,7 @@
 package Player;
 
 import java.util.Scanner;
+import token.*;
 
 /**
  *
@@ -32,7 +33,7 @@ public class PlayerConnectFour {
          return tokenName;
     }
     
-    public int addPlayer(Player player, ListInterface<Player> PlayerList){
+    public int addPlayer(Player player, ListInterface<Player> PlayerList, CircularLinkedList<Token> CirStr){
         
         int numOfPlayer;
         int check = 0;
@@ -50,12 +51,12 @@ public class PlayerConnectFour {
             
         }while(numOfPlayer < 2);
      
-        System.out.printf("\nPlease Enter The Player Name:    \n\n");
+        System.out.printf("\nPlease Enter The Player Name:    \n");
         scan.nextLine();
         
         for(int i = 0; i < numOfPlayer; i++){
            
-            System.out.printf("Player%2d Name:    ", i+1);
+            System.out.printf("\nPlayer%2d Name:    ", i+1);
             
             String playerName = scan.nextLine();
             
@@ -77,11 +78,13 @@ public class PlayerConnectFour {
             
                 PlayerList.add(player);
           
-                
+                TokenCount tok = new TokenCount();
+                char symbol = 'a';
+                tok.addPlayer(playerName, symbol, CirStr);           
             }
             else if (-1 == check || !Player.validateName(playerName)){
                 i--;
-                System.out.println("\nError Detected! Please Enter Again\n");
+                System.out.println("\nError Detected! Please Enter Again");
             }
            
         }
@@ -158,7 +161,7 @@ public class PlayerConnectFour {
     
     }
     
-    public void displayPlayerDetails(ListInterface<Player> PlayerList){
+    public void displayPlayerDetails(ListInterface<Player> PlayerList, CircularLinkedList<Token> CirStr){
         
         System.out.printf("\t\t\t============================\n");
         System.out.printf("\t\t\t     Player Details\n");
@@ -169,7 +172,7 @@ public class PlayerConnectFour {
         for(int i = 0; i < PlayerList.getLength(); i++){
            
             
-            System.out.printf("||\tPlayer %d\t\t    %s\t\t\t %s\t||\n",i,PlayerList.getEntry(i).getName(),PlayerList.getEntry(i).getTokenColour());  
+            System.out.printf("||\tPlayer %d\t\t    %s\t\t\t %c\t||\n",i,PlayerList.getEntry(i).getName(),CirStr.getEntry(i + 1).getToken());  
         }
         System.out.printf("=========================================================================\n");
     }
