@@ -50,9 +50,10 @@ public class BoardMain {
         
         String winner;
 
+        //////
         numOfPlayer = play.addPlayer(playerN, PlayerList, CirStr);
         
-
+        
         play.displayPlayerDetails(PlayerList, CirStr);
         
         connectNum = setConnectNum();
