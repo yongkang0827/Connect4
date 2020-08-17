@@ -31,16 +31,15 @@ public class BoardMain {
         System.out.println(String.format("%5s %s", " ", "AAAA  AAAA  A  A  A  A  AAAA  AAAA   A          A"));
         System.out.println(String.format("%5s %s", " ", "================================================="));
         System.out.println("\n");
-        System.out.println(String.format("%20s %s", " ", "(1)  Classic Mode"));
-        System.out.println(String.format("%20s %s", " ", "(2)  Tournament Mode"));
-        System.out.println(String.format("%20s %s", " ", "(3)  Leader Board"));
-        System.out.println(String.format("%20s %s", " ", "(4)  Exit"));
+        System.out.println(String.format("%20s %s", " ", "(1)  Play Game"));
+        System.out.println(String.format("%20s %s", " ", "(2)  Leader Board"));
+        System.out.println(String.format("%20s %s", " ", "(3)  Exit"));
         //System.out.println("\n");
-        System.out.print(String.format("\n%13s %s", " ", "Your selection (1/2/3/4): "));
+        System.out.print(String.format("\n%13s %s", " ", "Your selection (1/2/3): "));
             
     }
     
-    public void classicMode(){
+    public void Game(){
         Player playerN = new Player();
         ListInterface<Player> PlayerList = new ArrayList<>();
         ListInterface<Player> winnerList = new ArrayList<>();
@@ -231,10 +230,10 @@ public class BoardMain {
 
                 if(Character.isDigit(input.charAt(0))){
                     menuSelection = Integer.parseInt(input);
-                    if(menuSelection >= 1 && menuSelection <= 4){
+                    if(menuSelection >= 1 && menuSelection <= 3){
                         validMenuSelection = true;
                     }else{
-                        System.out.println(String.format("%s %s", " ", "Invalid selection! Please enter your selection between 1 - 4\n"));
+                        System.out.println(String.format("%s %s", " ", "Invalid selection! Please enter your selection between 1 - 3\n"));
                         validMenuSelection = false;
                     }    
                 }else{
@@ -245,18 +244,15 @@ public class BoardMain {
             
             switch(menuSelection){
                 case 1:
-                    //Classic mode
-                    boardMain.classicMode();
+
+                    boardMain.Game();
                     break;
+
                 case 2:
-                    //Tournament mode
-                    //System.out.println("Tournament mode");
-                    break;
-                case 3:
                     //Ranking
                     //System.out.println("Ranking");
                     break;
-                case 4:
+                case 3:
                     //Exit
                     System.out.println(String.format("%11s %s", " ", "Hope you have a nice day! Bye!!"));
                     break;
@@ -264,7 +260,7 @@ public class BoardMain {
                     break;
             }
             
-        }while(menuSelection != 4);
+        }while(menuSelection != 3);
         
         
         
