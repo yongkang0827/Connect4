@@ -127,6 +127,11 @@ public class Ranking implements Comparable<Ranking> {
         System.out.println(line);
     }
     
+   public void clone(Ranking ranking){
+        this.winner = ranking.winner;
+        this.sortedPlayerList = ranking.sortedPlayerList;
+        this.playerNum = ranking.playerNum;
+        this.totalTime = ranking.totalTime;
+    }
     
 }
-
