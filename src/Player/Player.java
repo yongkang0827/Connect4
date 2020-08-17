@@ -90,12 +90,20 @@ public class Player implements Comparable<Player>{
         return true;
     }
     
-    public static boolean validateName(String name) {
+    public static boolean validateName(String name, ListInterface<Player> PlayerList) {
+        
+       
         
         String currentName = name ;
-        String regexName = "^[aA-zZ]\\w{2,29}$";
+        String regexName = "^[aA-zZ]\\w{0,29}$";
+        int check = 0;
         
-        return !(name.length() < 2 || !currentName.matches(regexName));
+        for(int i = 0; i < PlayerList.getLength(); i++){
+            if(PlayerList.getEntry(i).getName().equals(name)){
+                check = -1;
+            }
+        }
+        return !(name.length() < 0 || !currentName.matches(regexName) || (check == -1)) ;
     }
 
     @Override

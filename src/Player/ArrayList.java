@@ -143,15 +143,26 @@ public class ArrayList<T> implements ListInterface<T> {
     
     @Override
     public boolean contains(T anEntry){
-        if(anEntry != null){
+        
+        
+        boolean found = false;
+        for (int index = 0; !found && (index < size); index++) {
+            if (anEntry.equals(arr[index])) {
+                found = true;
+            }
+        }
+
+        return found;
+  
+       // if(anEntry != null){
            
-           for(int i = 0; i < size; i++){
-               if(arr[i] == anEntry){
-                   return true;
-               }
-           }
-       }
-        return false;
+          // for(int i = 0; i < size; i++){
+          //     if(arr[i] == anEntry){
+          //         return true;
+          //     }
+         //  }
+     //  }
+      //  return false;
    }
    
     @Override

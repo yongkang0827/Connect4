@@ -48,24 +48,14 @@ public class PlayerConnectFour {
                 System.out.printf("\nPlayer%2d Name:    ", i+1);
             
                 playerName = scan.nextLine();
-            
-                for(int j = 0; j < PlayerList.getLength(); j++){
-                
-                    if(Character.compare(playerName.charAt(0), PlayerList.getEntry(j).getName().charAt(0)) == 0){
-                        check = -1;
-                    }
-                    else{
-                        check = 0;
-                    }
-                }
-            
-                if(Player.validateName(playerName) && check == 0){
+       
+                if(Player.validateName(playerName,PlayerList)){
                 
             
                     player = new Player(playerName);
-            
-                    PlayerList.add(player);
           
+                    PlayerList.add(player);
+                
                     TokenCount tok = new TokenCount();
                     char symbol = 'a';
                     tok.addPlayer(playerName, symbol, CirStr);   
@@ -78,7 +68,7 @@ public class PlayerConnectFour {
                     }
                     
                 }
-                else if (-1 == check || !Player.validateName(playerName)){
+                else if (-1 == check || !Player.validateName(playerName,PlayerList)){
                     i--;
                     System.out.println("\nError Detected! Please Enter Again");
                 }
@@ -171,8 +161,12 @@ public class PlayerConnectFour {
         System.out.printf("||\t Player\t\t\tPlayer Name\t\t\tToken\t||\n");
         for(int i = 0; i < PlayerList.getLength(); i++){
            
-            
-            System.out.printf("||\tPlayer %d\t\t    %s\t\t\t %c\t||\n",i,PlayerList.getEntry(i).getName(),PlayerList.getEntry(i).getToken());  
+             System.out.println(String.format("||%12d %-18s %-31s %c\t||",
+                    (i+1), 
+                    " ",
+                    PlayerList.getEntry(i).getName(), 
+                    PlayerList.getEntry(i).getToken()));
+            //System.out.printf("||\tPlayer %d\t\t    %s\t\t\t %c\t||\n",i+1,PlayerList.getEntry(i).getName(),PlayerList.getEntry(i).getToken());  
         }
         System.out.printf("=========================================================================\n");
     }
