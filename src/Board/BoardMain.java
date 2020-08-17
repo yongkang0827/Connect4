@@ -19,20 +19,35 @@ import java.util.Scanner;
  * @author CYL
  */
 public class BoardMain {
- 
     
+    public BoardMain(){}
+   
+    public void displayLogo(){
+        System.out.println(String.format("\n\n%5s %s", " ", "================================================="));
+        System.out.println(String.format("%5s %s", " ", "AAAA  AAAA  A  A  A  A  AAAA  AAAA AAAAA     A  A"));
+        System.out.println(String.format("%5s %s", " ", "A     A  A  A  A  A  A  A     A      A       A  A"));
+        System.out.println(String.format("%5s %s", " ", "A     A  A  AA A  AA A  AAAA  A      A       AAAA  "));
+        System.out.println(String.format("%5s %s", " ", "A     A  A  A AA  A AA  A     A      A          A"));
+        System.out.println(String.format("%5s %s", " ", "AAAA  AAAA  A  A  A  A  AAAA  AAAA   A          A"));
+        System.out.println(String.format("%5s %s", " ", "================================================="));
+        System.out.println("\n");
+        System.out.println(String.format("%20s %s", " ", "(1)  Classic Mode"));
+        System.out.println(String.format("%20s %s", " ", "(2)  Tournament Mode"));
+        System.out.println(String.format("%20s %s", " ", "(3)  Leader Board"));
+        System.out.println(String.format("%20s %s", " ", "(4)  Exit"));
+        //System.out.println("\n");
+        System.out.print(String.format("\n%13s %s", " ", "Your selection (1/2/3/4): "));
+            
+    }
     
-    public static void main(String args[]) {
-     
-       
+    public void classicMode(){
         Player playerN = new Player();
         ListInterface<Player> PlayerList = new ArrayList<>();
         ListInterface<Player> winnerList = new ArrayList<>();
         PlayerConnectFour play = new PlayerConnectFour();
         SortedLinkedList<Player> sortedPlayerList = new SortedLinkedList<>();
         CircularLinkedList<Token> CirStr = new CircularLinkedList<>();
-        TokenCount token = new TokenCount();        
-       
+        TokenCount token = new TokenCount();
         
         int rows = 9; 
         int cols = 8;
@@ -49,8 +64,7 @@ public class BoardMain {
         char currentToken[] = {'K', 'T'};
         
         String winner;
-
-        //////
+        
         numOfPlayer = play.addPlayer(playerN, PlayerList, CirStr);
         
         
@@ -142,7 +156,7 @@ public class BoardMain {
         ranking.displayRanking();
     }
 
-    public static int setConnectNum(){
+    public int setConnectNum(){
         Scanner scan = new Scanner(System.in);
         char selectConnectNum = 2;
         boolean validSelection;
@@ -190,4 +204,69 @@ public class BoardMain {
         }
         
     }
+    
+    public void tournamentMode(){
+        
+    }
+    
+    public void leaderBoard(){
+        
+    }
+    
+    public static void main(String args[]) {
+        BoardMain boardMain = new BoardMain();
+        Scanner scan = new Scanner(System.in);
+
+        int menuSelection = 0;
+        boolean validMenuSelection = false;
+
+        ////// 
+        do{
+            do{
+                validMenuSelection = false;
+                
+                boardMain.displayLogo();
+                String input = scan.nextLine();
+                System.out.println(" ");
+
+                if(Character.isDigit(input.charAt(0))){
+                    menuSelection = Integer.parseInt(input);
+                    if(menuSelection >= 1 && menuSelection <= 4){
+                        validMenuSelection = true;
+                    }else{
+                        System.out.println(String.format("%s %s", " ", "Invalid selection! Please enter your selection between 1 - 4\n"));
+                        validMenuSelection = false;
+                    }    
+                }else{
+                    System.out.println(String.format("%s %s", " ", "Invalid selection! Please enter digit only\n"));
+                    validMenuSelection = false;
+                }
+            }while(validMenuSelection == false);
+            
+            switch(menuSelection){
+                case 1:
+                    //Classic mode
+                    boardMain.classicMode();
+                    break;
+                case 2:
+                    //Tournament mode
+                    //System.out.println("Tournament mode");
+                    break;
+                case 3:
+                    //Ranking
+                    //System.out.println("Ranking");
+                    break;
+                case 4:
+                    //Exit
+                    System.out.println(String.format("%11s %s", " ", "Hope you have a nice day! Bye!!"));
+                    break;
+                default:
+                    break;
+            }
+            
+        }while(menuSelection != 4);
+        
+        
+        
+}
 }

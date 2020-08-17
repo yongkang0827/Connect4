@@ -45,27 +45,37 @@ public class SortedLinkedList <T extends Comparable<T>> implements SortedListInt
 
     @Override
     public boolean remove(T anEntry) {
-      /*  Node previous = firstNode;
-        Node currentNode = firstNode.next;
+       if (isEmpty()) { throw new IllegalStateException("Empty list!"); }
+        boolean result = false;
+        Node previousNode = firstNode;
+        Node currentNode = firstNode;
         
-        while (currentNode != null) {
-            T dataOld = currentNode.data;
-            if ((dataOld == null && anEntry == null) || (dataOld != null && dataOld.equals(anEntry))) {
-                Node afterRemoved = current.getNext();
-                previous.setNext(afterRemoved);
-                if (afterRemoved == null) { // i.e. removing last element
-                    last = previous;
+        while (currentNode.next != null) {
+            if (currentNode.data.equals(anEntry)) {
+                if (length == 1) { 
+                    firstNode = null; 
                 }
-                size--;
-                return true;
-            } else {
-                previous = currentNode;
-                currentNode = currentNode.next;
+                // remove first element
+                else if (currentNode.equals(firstNode)) {
+                    firstNode = firstNode.next; 
+                }
+                // remove last element
+                else if (currentNode.next == null) {
+                    currentNode.data = null; 
+                    currentNode = previousNode;
+                }
+                // remove element
+                else { 
+                    previousNode.next = currentNode.next; 
+                }
+                length--;
+                result = true;
+                break;
             }
+            previousNode = currentNode;
+            currentNode = previousNode.next;
         }
-        return false;*/
-  
-        throw new UnsupportedOperationException();	// Left as Practical exercise
+        return result;
     }
 
     @Override

@@ -77,7 +77,7 @@ public class Ranking implements Comparable<Ranking> {
     public void displayRanking(){
         //title
         drawLine(12,28);
-        System.out.println(String.format("%40s","Leader Board"));
+        System.out.println(String.format("%37s","Ranking"));
         drawLine(12,28);
         
         drawLine(52,9);     
@@ -105,11 +105,7 @@ public class Ranking implements Comparable<Ranking> {
         drawLine(52,9);
     }
     
-    public void updateRanking(){
-        
-    }
-    
-    public void drawLine(int length, int space){
+    public static void drawLine(int length, int space){
         String line = "";
         for(int i = 0; i < space; i++){
             line += " ";
@@ -120,7 +116,7 @@ public class Ranking implements Comparable<Ranking> {
         System.out.println(line);
     }
     
-    public void drawLine2(int length, int space){
+    public static void drawLine2(int length, int space){
         String line = "";
         for(int i = 0; i < space; i++){
             line += " ";
