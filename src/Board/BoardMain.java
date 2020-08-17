@@ -5,6 +5,8 @@
  */
 package Board;
 
+import GameMode.GameMode;
+import GameMode.Tournament;
 import Player.ArrayList;
 import Player.Player;
 import Player.PlayerConnectFour;
@@ -46,8 +48,9 @@ public class BoardMain {
         PlayerConnectFour play = new PlayerConnectFour();
         SortedLinkedList<Player> sortedPlayerList = new SortedLinkedList<>();
         CircularLinkedList<Token> CirStr = new CircularLinkedList<>();
-        TokenCount token = new TokenCount();
-        
+        TokenCount token = new TokenCount();        
+
+        Tournament tour=new Tournament();
         int rows = 9; 
         int cols = 8;
         int connectNum; 
@@ -64,16 +67,24 @@ public class BoardMain {
         
         String winner;
         
-        numOfPlayer = play.addPlayer(playerN, PlayerList, CirStr);
+        //////
+        int gamemode=selectGameMode();
         
+        numOfPlayer = play.addPlayer(playerN, PlayerList, CirStr,gamemode);
         
+        tour.initialize(PlayerList);
+        
+        if(gamemode==1)
         play.displayPlayerDetails(PlayerList, CirStr);
+        else tour.display();
+        
         
         connectNum = setConnectNum();
                 
         do{
-
+            if(gamemode==1)
         currentPlayer = play.retrievePlayerForEachRound(PlayerList, winnerList,round);
+            else currentPlayer=tour.retrievePlayerForEachRound();
         currentToken[0] = token.retrieveToken(currentPlayer[0], CirStr);
         currentToken[1] = token.retrieveToken(currentPlayer[1], CirStr);      
         
@@ -116,9 +127,11 @@ public class BoardMain {
                      mainBoard.setTime();
                      timeTaken = mainBoard.totalTimeTaken(startTime);
                      totalTime += timeTaken;
+                    playerW.setName(currentPlayer[0]);
+                    if(gamemode==1){
                      play.calculateAndAssignScore(timeTaken,CirStr.getEntry(1).getCount(),PlayerList,currentPlayer[0]);
-                     playerW.setName(currentPlayer[0]);
                      winnerList.add(playerW);
+                     }else tour.stepUp(playerW);
                      round++;
 
                 }else{
@@ -127,9 +140,12 @@ public class BoardMain {
                      mainBoard.setTime();
                      timeTaken = mainBoard.totalTimeTaken(startTime);
                      totalTime += timeTaken;
-                     play.calculateAndAssignScore(timeTaken,CirStr.getEntry(2).getCount(),PlayerList,currentPlayer[1]);
                      playerW.setName(currentPlayer[1]);
+                     if(gamemode==1){
+                     play.calculateAndAssignScore(timeTaken,CirStr.getEntry(2).getCount(),PlayerList,currentPlayer[1]);
                      winnerList.add(playerW);
+                     }
+                     else tour.stepUp(playerW);
                      round++;
                 }
                 
@@ -205,11 +221,57 @@ public class BoardMain {
         
     }
     
-    public void tournamentMode(){
+    public static int selectGameMode(){
+        GameMode[] gamemode={
+        new GameMode(1,"Multiplayer","Up to User"),
+        new GameMode(2,"Tournament","Must be 8 player")
+        };
         
-    }
+        Scanner scan = new Scanner(System.in);
+         boolean validSelection;
+        char selectConnectNum = 2;
+        do{
+            System.out.println("\n Please select your Game Mode   ");
+            System.out.println(" ===================  ");
+            for(int i=0;i<gamemode.length;i++){
+                System.out.println("("+gamemode[i].getID() +") "+gamemode[i].getName()+"   (Player Allow :" + gamemode[i].getRule()+")");
+                
+            }
+            System.out.print(" Pls enter the mode number (1/2) : ");
+            String selection = scan.nextLine();
+
+            if(selection.compareTo("") == 0){
+                System.out.println("Pls enter a mode slection ...");
+               validSelection = false;
+               
+            }else{
+                selectConnectNum = selection.charAt(0);
+            
+                if(!Character.isDigit(selectConnectNum)){
+                    System.out.println("\nNOT A NUMBER ! ");
+                    validSelection = false;
+                }else if( Character.getNumericValue(selectConnectNum) < 1 || Character.getNumericValue(selectConnectNum) > 2){
+                    System.out.println("\nInvalid Selection ! Must 1 / 2  ... ");
+                    validSelection = false;
+                }else{
+                    validSelection = true;
+                }
+            }
+            
+            
+            
+        }while( !validSelection);
+            
+            if(Character.getNumericValue(selectConnectNum)==1)
+                return 1;
+            else
+                return 2;
+
+        }
     
-    public void leaderBoard(SortedLinkedList<Ranking> rankingList){
+
+    
+        public void leaderBoard(SortedLinkedList<Ranking> rankingList){
         drawLine(12,28);
         System.out.println(String.format("%40s","Leader Board"));
         drawLine(12,28);

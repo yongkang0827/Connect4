@@ -18,7 +18,7 @@ public class PlayerConnectFour {
     
 
     
-    public int addPlayer(Player player, ListInterface<Player> PlayerList, CircularLinkedList<Token> CirStr){
+    public int addPlayer(Player player, ListInterface<Player> PlayerList, CircularLinkedList<Token> CirStr,int gamemode){
         
         int numOfPlayer;
         int check = 0;
@@ -29,15 +29,18 @@ public class PlayerConnectFour {
         System.out.printf("             Player Registration\n");
         System.out.printf("         ==========================\n");
         
+        if(gamemode==1){
         do{
             
             System.out.printf("Please Enter The Number Of Player For This Round:   ");
             numOfPlayer = scan.nextInt();
             
         }while(numOfPlayer < 2);
+        }else numOfPlayer =8;
      
         do{
             System.out.printf("\nPlease Enter The Player Name:    \n");
+            if(gamemode==1)
             scan.nextLine();
         
             for(int i = 0; i < numOfPlayer; i++){
@@ -145,7 +148,7 @@ public class PlayerConnectFour {
             
             if(PlayerList.getEntry(i).getName().equals(playerName)){
                 playerScore = PlayerList.getEntry(i).getScore();
-                double score = (double) (min/tokenCount)*10000;
+                double score = (double) min/tokenCount;
                 
                  if(playerScore == 0){
                         PlayerList.getEntry(i).setScore(score);
