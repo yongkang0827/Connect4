@@ -16,7 +16,7 @@ import token.TokenCount;
  */
 public class PlayerConnectFour {
     
-    
+
     
     public int addPlayer(Player player, ListInterface<Player> PlayerList, CircularLinkedList<Token> CirStr,int gamemode){
         
@@ -29,19 +29,97 @@ public class PlayerConnectFour {
         System.out.printf("             Player Registration\n");
         System.out.printf("         ==========================\n");
         
+        boolean validSelection;
+        char select = 4;
+        
         if(gamemode==1){
         do{
             
             System.out.printf("Please Enter The Number Of Player For This Round:   ");
-            numOfPlayer = scan.nextInt();
+            String selection =  scan.nextLine();
             
-        }while(numOfPlayer < 2);
-        }else numOfPlayer =8;
+        if(selection.compareTo("") == 0){
+                System.out.println("Please Enter Number Of Player");
+               validSelection = false;
+               
+            }else{
+                select = selection.charAt(0);
+            
+                if(!Character.isDigit(select)){
+                    System.out.println("\nNOT A NUMBER ! ");
+                    validSelection = false;
+                }else if( Character.getNumericValue(select) < 2 || Character.getNumericValue(select) > 9){
+                    System.out.println("\nInvalid Selection ! Must between 2 to 10 player  ... ");
+                    validSelection = false;
+                }else{
+                    validSelection = true;
+                }
+            }}while(!validSelection);
+        
+        switch(Character.getNumericValue(select)){
+            case 2:
+                numOfPlayer=2;
+                break;
+            case 3:
+                numOfPlayer=3;
+                break;
+            case 4:
+                numOfPlayer=4;
+                break;
+            case 5:
+                numOfPlayer=5;
+                break;
+            case 6:
+                numOfPlayer=6;
+                break;
+            case 7:
+                numOfPlayer=7;
+                break;
+            case 8:
+                numOfPlayer=8;
+                break;
+            case 9:
+                numOfPlayer=9;
+                break;
+
+            default:
+                numOfPlayer=10;
+        }
+        }
+        else {
+            
+            do{
+            
+            System.out.printf("Please Enter The Number Of Player For Tournament （Only 4/8 player allowed) :   ");
+            String selection =  scan.nextLine();
+
+            if(selection.compareTo("") == 0){
+                System.out.println("Please Enter Number Of Player");
+               validSelection = false;
+               
+            }else{
+                select = selection.charAt(0);
+            
+                if(!Character.isDigit(select)){
+                    System.out.println("\nNOT A NUMBER ! ");
+                    validSelection = false;
+                }else if( Character.getNumericValue(select) != 4 && Character.getNumericValue(select) != 8){
+                    System.out.println("\nInvalid Selection ! Must 4 / 8  ... ");
+                    validSelection = false;
+                }else{
+                    validSelection = true;
+                }
+            }}while(!validSelection);
+                if(Character.getNumericValue(select)==4)
+                numOfPlayer= 4;
+            else
+                numOfPlayer= 8;
+        }
      
         do{
             System.out.printf("\nPlease Enter The Player Name:    \n");
-            if(gamemode==1)
-            scan.nextLine();
+            //if(gamemode==1)
+            //scan.nextLine();
         
             for(int i = 0; i < numOfPlayer; i++){
            

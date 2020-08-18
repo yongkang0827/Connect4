@@ -84,7 +84,7 @@ public class BoardMain {
         do{
             if(gamemode==1)
         currentPlayer = play.retrievePlayerForEachRound(PlayerList, winnerList,round);
-            else currentPlayer=tour.retrievePlayerForEachRound();
+            else currentPlayer=tour.retrievePlayerForEachRound(numOfPlayer);
         currentToken[0] = token.retrieveToken(currentPlayer[0], CirStr);
         currentToken[1] = token.retrieveToken(currentPlayer[1], CirStr);      
         
@@ -131,7 +131,7 @@ public class BoardMain {
                     if(gamemode==1){
                      play.calculateAndAssignScore(timeTaken,CirStr.getEntry(1).getCount(),PlayerList,currentPlayer[0]);
                      winnerList.add(playerW);
-                     }else tour.stepUp(playerW);
+                     }else tour.stepUp(playerW,numOfPlayer);
                      round++;
 
                 }else{
@@ -145,13 +145,17 @@ public class BoardMain {
                      play.calculateAndAssignScore(timeTaken,CirStr.getEntry(2).getCount(),PlayerList,currentPlayer[1]);
                      winnerList.add(playerW);
                      }
-                     else tour.stepUp(playerW);
+                     else tour.stepUp(playerW,numOfPlayer);
                      round++;
                 }
                 
                 mainBoard.displayBoard();
                 token.finishEachRound(CirStr);
                 System.out.println("\nWinner is "+ winner.toUpperCase());
+                
+                if(gamemode==2)
+                tour.display();
+                
                 break;
             }
             
@@ -168,8 +172,10 @@ public class BoardMain {
         }
         
         Ranking ranking = new Ranking(sortedPlayerList, totalTime);
+        if(gamemode==1){
         ranking.displayRanking();
         rankingList.add(ranking);
+        }else tour.champion();
     }
 
     public int setConnectNum(){
@@ -224,7 +230,7 @@ public class BoardMain {
     public static int selectGameMode(){
         GameMode[] gamemode={
         new GameMode(1,"Multiplayer","Up to User"),
-        new GameMode(2,"Tournament","Must be 8 player")
+        new GameMode(2,"Tournament","Must be 4/8 player")
         };
         
         Scanner scan = new Scanner(System.in);
@@ -241,7 +247,7 @@ public class BoardMain {
             String selection = scan.nextLine();
 
             if(selection.compareTo("") == 0){
-                System.out.println("Pls enter a mode slection ...");
+                System.out.println("Pls enter a mode selection ...");
                validSelection = false;
                
             }else{

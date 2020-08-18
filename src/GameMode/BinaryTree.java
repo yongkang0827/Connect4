@@ -10,25 +10,39 @@ package GameMode;
  */
 
 public class BinaryTree <T> implements BinaryTreeInterface<T>{
-    static int nextPosition =0;
+        private Node root;
+        private Node left;
+        private Node right;
+        private Node topRoot;
+        private Node parent;
+        private Node x=new Node("Node not exist ");
+       static int nextPosition;
+        public BinaryTree(){
+        clear();
+        nextPosition =1;
+        root=null;
+        topRoot=root;
+        }
+    
     class Node<T>{
     private T data;
     private int position;
     private Node parent;
     private Node left;
     private Node right;
-    //private int nextPosition =1;
-		
-// Constructs a new node to store the given data value.
-	private Node(T data) {
-		this.data = data;
-                this.position=nextPosition;
- 		//this.left = null;
- 		//this.right = null;
-                nextPosition++;
-	}
 
-        private Node(T data,Node parent, Node left,Node right){
+		
+// Constructs a new node to store the given data value.     
+
+        private Node(T data) {
+            this.data = data;
+            this.position=nextPosition;
+            this.left = null;
+            this.right = null;
+            nextPosition++;
+        }
+
+        private Node(T data,Node parent,Node left,Node right){
             this.data = data;
             this.parent=parent;
             this.left = left;
@@ -36,6 +50,8 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
             this.position=nextPosition;
             nextPosition++;
         }
+        
+        
 
         public T getData() {
             if(data==null)
@@ -76,18 +92,7 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
         }
     }
         
-        private Node root;
-        private Node left;
-        private Node right;
-        private Node topRoot;
-        private Node parent;
-        private Node x=new Node("Node not exist ");
-       
-        public BinaryTree(){
-        root=null;
-        topRoot=root;
-
-        }
+        
 
     public Node getX() {
         return x;
@@ -114,40 +119,92 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
 
         
       public void addRoot(T newEntry){
+       if(root==null){
        root=new Node(newEntry);
        topRoot=root;
        parent=root;
+       } else System.out.print("Node already exist\n");
    } 
     
     public void addChild(T newEntry1,T newEntry2){
-       left=new Node(newEntry1,root,null,null);
-       root.setLeft(left);
+        if(root!=null){
+        
+            if(root.getLeft()==null){
+                left=new Node(newEntry1,root,null,null);
+                root.setLeft(left);
+                
+            }
+            else{ System.out.print("Node already exist");
+            System.out.print(root.getLeft().getData());
+            }
        
-       right=new Node(newEntry2,root,null,null);
-       root.setRight(right); 
-       
+            if(root.getRight()==null){
+                right=new Node(newEntry2,root,null,null);
+                root.setRight(right);
+                
+            }else System.out.print("Node already exist");
+        
+        }else System.out.print("Please add root first");
    } 
+    
   
     
-    public void searchNode(Node node,int n){
+    public void searchNode(int n){
+        searchNodeRecursive(topRoot,n);
+    }
+    
+    public void searchNodeRecursive(Node node,int n){
         if(node==null){
             return;}
         
         if(n==node.getPosition()){
             root=node;
-        System.out.print(node.getData()+"\n"); 
            }
-        
-        
-        searchNode(node.getLeft(),n);
-        searchNode(node.getRight(),n);
-        
-           
-            
+        searchNodeRecursive(node.getLeft(),n);
+        searchNodeRecursive(node.getRight(),n);     
     }
+    
+    public void printNode(int n){
+        searchNodeRecursive(topRoot,n);
+        System.out.print(root.getData()+"\n"); 
+    }
+    
         public boolean isRoot(Node p) {
         return p == getTopRoot();
         }
+        
+        public void clear(){
+//                clearNode(topRoot);
+            topRoot=null;
+        }
+        
+         public boolean isEmpty() {
+        return nextPosition == 1;
+    }
+         public int size(){
+             return nextPosition-1;
+         }
+         
+         public Node root(){
+             return topRoot;
+         }
+         
+         public int layer(Node node){
+             
+             if (node == topRoot) 
+            return 1; 
+             
+         return 1+layer(node.parent);
+         }
+        
+        public int depth(Node node){
+             
+             if (node == null) 
+            return 0; 
+             
+         return 1+depth(node.left);
+         }
+ 
         
         public void displayPost(Node node){
             if(node==null){
@@ -252,7 +309,7 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
             previous();
         }*/
 
-    /*public Node getLeft() {
+    public Node getLeft() {
         if(root.getLeft()==null)
             return x;
         else return root.getLeft();
@@ -270,7 +327,7 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
 
     public void setRight(Node right) {
         this.right = right;
-    }*/
+    }
      
 
     
