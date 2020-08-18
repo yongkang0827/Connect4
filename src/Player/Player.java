@@ -55,57 +55,7 @@ public class Player implements Comparable<Player>{
         this.score = score;
     }
 
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 43 * hash + Objects.hashCode(this.name);
-        hash = 43 * hash + Objects.hashCode(this.token);
-        hash = 43 * hash + (int) (Double.doubleToLongBits(this.score) ^ (Double.doubleToLongBits(this.score) >>> 32));
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Player other = (Player) obj;
-        if (Double.doubleToLongBits(this.score) != Double.doubleToLongBits(other.score)) {
-            return false;
-        }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.token, other.token)) {
-            return false;
-        }
-      
-        return true;
-    }
     
-    public static boolean validateName(String name, ListInterface<Player> PlayerList) {
-        
-       
-        
-        String currentName = name ;
-        String regexName = "^[aA-zZ]\\w{0,29}$";
-        int check = 0;
-        
-        for(int i = 0; i < PlayerList.getLength(); i++){
-            if(PlayerList.getEntry(i).getName().equals(name)){
-                check = -1;
-            }
-        }
-        return !(name.length() < 0 || !currentName.matches(regexName) || (check == -1)) ;
-    }
-
     @Override
     public String toString() {
         return "name=" + name + ", tokenColour=" + token + ", score=" + score ;

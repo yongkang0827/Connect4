@@ -16,7 +16,7 @@ import token.TokenCount;
  */
 public class PlayerConnectFour {
     
-
+    
     
     public int addPlayer(Player player, ListInterface<Player> PlayerList, CircularLinkedList<Token> CirStr,int gamemode){
         
@@ -49,7 +49,7 @@ public class PlayerConnectFour {
             
                 playerName = scan.nextLine();
        
-                if(Player.validateName(playerName,PlayerList)){
+                if(validateName(playerName,PlayerList)){
                 
             
                     player = new Player(playerName);
@@ -68,7 +68,7 @@ public class PlayerConnectFour {
                     }
                     
                 }
-                else if (-1 == check || !Player.validateName(playerName,PlayerList)){
+                else if (-1 == check || !validateName(playerName,PlayerList)){
                     i--;
                     System.out.println("\nError Detected! Please Enter Again");
                 }
@@ -169,5 +169,21 @@ public class PlayerConnectFour {
             //System.out.printf("||\tPlayer %d\t\t    %s\t\t\t %c\t||\n",i+1,PlayerList.getEntry(i).getName(),PlayerList.getEntry(i).getToken());  
         }
         System.out.printf("=========================================================================\n");
+    }
+    
+    public  boolean validateName(String name, ListInterface<Player> PlayerList) {
+        
+       
+        
+        String currentName = name ;
+        String regexName = "^[aA-zZ]\\w{0,29}$";
+        int check = 0;
+        
+        for(int i = 0; i < PlayerList.getLength(); i++){
+            if(PlayerList.getEntry(i).getName().equals(name)){
+                check = -1;
+            }
+        }
+        return !(name.length() < 0 || !currentName.matches(regexName) || (check == -1)) ;
     }
 }
