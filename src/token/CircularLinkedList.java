@@ -196,6 +196,9 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
     @Override //DONE!
     public boolean removeFirst(){
         
+        if(isEmpty()){
+            return false;
+        }
         temp = head;
         
         head = head.next;
@@ -363,7 +366,7 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
     public int getLength() {
         return size;
     }
-     @Override
+    @Override
     public boolean isEmpty(){
         
         boolean result;
