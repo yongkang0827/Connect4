@@ -30,8 +30,6 @@ public class PlayerConnectFour {
         System.out.printf("             Player Registration\n");
         System.out.printf("         ==========================\n");
         
-        boolean validSelection;
-        char select = 4;
 
         if(gamemode==1){
         do{
@@ -65,8 +63,8 @@ public class PlayerConnectFour {
                if(numOfPlayer != 4 && numOfPlayer != 8){
                    System.out.println("Input Must be 4 or 8");
                }
-           }
-           catch (InputMismatchException ex){
+              }
+              catch (InputMismatchException ex){
                System.out.println("Invalid Input Detected!");
                scan.next();
            }
