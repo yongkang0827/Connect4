@@ -25,13 +25,13 @@ public class BoardMain {
     public BoardMain(){}
    
     public void displayLogo(){
-        System.out.println(String.format("\n\n%5s %s", " ", "================================================="));
+        System.out.println(String.format("\n\n%5s %s", " ", "===================================================="));
         System.out.println(String.format("%5s %s", " ", "AAAA  AAAA  A  A  A  A  AAAA  AAAA AAAAA     A  A"));
         System.out.println(String.format("%5s %s", " ", "A     A  A  A  A  A  A  A     A      A       A  A"));
-        System.out.println(String.format("%5s %s", " ", "A     A  A  AA A  AA A  AAAA  A      A       AAAA  "));
+        System.out.println(String.format("%5s %s", " ", "A     A  A  AA A  AA A  AAAA  A      A       AAAAAA  "));
         System.out.println(String.format("%5s %s", " ", "A     A  A  A AA  A AA  A     A      A          A"));
         System.out.println(String.format("%5s %s", " ", "AAAA  AAAA  A  A  A  A  AAAA  AAAA   A          A"));
-        System.out.println(String.format("%5s %s", " ", "================================================="));
+        System.out.println(String.format("%5s %s", " ", "===================================================="));
         System.out.println("\n");
         System.out.println(String.format("%20s %s", " ", "(1)  Play Game"));
         System.out.println(String.format("%20s %s", " ", "(2)  Leader Board"));
@@ -217,7 +217,6 @@ public class BoardMain {
         switch(Character.getNumericValue(selectConnectNum)){
             case 1:
                 return 3;
-            
             case 3:
                 return 5;
             case 2:
@@ -229,8 +228,8 @@ public class BoardMain {
     
     public static int selectGameMode(){
         GameMode[] gamemode={
-        new GameMode(1,"Multiplayer","Up to User"),
-        new GameMode(2,"Tournament","Must be 4/8 player")
+        new GameMode(1,"Classic Mode","Up to User"),
+        new GameMode(2,"Tournament Mode","Must 4 / 8 Players")
         };
         
         Scanner scan = new Scanner(System.in);
@@ -274,10 +273,8 @@ public class BoardMain {
                 return 2;
 
         }
-    
 
-    
-        public void leaderBoard(SortedLinkedList<Ranking> rankingList){
+    public void leaderBoard(SortedLinkedList<Ranking> rankingList){
         drawLine(12,28);
         System.out.println(String.format("%40s","Leader Board"));
         drawLine(12,28);
