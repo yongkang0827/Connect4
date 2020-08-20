@@ -183,7 +183,6 @@ public class PlayerConnectFour {
                     " ",
                     PlayerList.getEntry(i).getName(), 
                     PlayerList.getEntry(i).getToken()));
-            //System.out.printf("||\tPlayer %d\t\t    %s\t\t\t %c\t||\n",i+1,PlayerList.getEntry(i).getName(),PlayerList.getEntry(i).getToken());  
         }
         System.out.printf("=========================================================================\n");
     }
