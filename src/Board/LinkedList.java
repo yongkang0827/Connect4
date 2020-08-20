@@ -109,9 +109,9 @@ public class LinkedList<T> implements ListInterface<T> {
         if ((givenPosition >= 0) && (givenPosition < length)) {
           Node currentNode = node;
           for (int i = 0; i < givenPosition ; i++) {
-            currentNode = currentNode.next;		// advance currentNode to next node
+            currentNode = currentNode.next;		
           }
-          currentNode.data = newEntry;	// currentNode is pointing to the node at givenPosition
+          currentNode.data = newEntry;	
         } else {
           return false;
         }

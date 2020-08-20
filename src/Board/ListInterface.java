@@ -10,11 +10,11 @@ package Board;
  */
 public interface ListInterface<T> {
     
-  public boolean add(T newEntry); //
+  public boolean add(T newEntry); 
 
   public boolean add(int newPosition, T newEntry);
 
-  public T remove(int givenPosition); //
+  public T remove(int givenPosition); 
 
   public void clear();
 
@@ -24,7 +24,7 @@ public interface ListInterface<T> {
 
   public boolean contains(T anEntry);
 
-  public int getLength(); //get col
+  public int getLength(); 
 
   public boolean isEmpty();
 

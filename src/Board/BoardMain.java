@@ -67,7 +67,7 @@ public class BoardMain {
         
         String winner;
         
-        //////
+        
         int gamemode=selectGameMode();
         
         numOfPlayer = play.addPlayer(playerN, PlayerList, CirStr,gamemode);
