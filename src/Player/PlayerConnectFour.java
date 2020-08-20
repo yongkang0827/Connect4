@@ -115,24 +115,6 @@ public class PlayerConnectFour {
       return numOfPlayer;
     }
     
-    public String[] assignedPlayer(Player player,ListInterface<Player> PlayerList,int numOfPlayer){
-        
-      
-        int length = PlayerList.getLength();
-        int x = 0;
-        
-        
-        String[] playerName = new String[numOfPlayer];
-        
-        for(int i = 0; i < length; i ++){
-            
-            playerName[x] = PlayerList.getEntry(i).getName();
-            x++;
-        }
-        
-        return playerName;
-    }
-    
     public String[] retrievePlayerForEachRound(ListInterface<Player> PlayerList,ListInterface<Player> winnerList,int round){
         
         String [] playerName = new String[2];
