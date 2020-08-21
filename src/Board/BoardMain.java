@@ -64,12 +64,9 @@ public class BoardMain {
         
         double startTime, timeTaken;
         double totalTime = 0; // total time for all round
-        String currentPlayer[];
+        String currentPlayer[], winner;
         char currentToken[] = new char[2];
         LinkedList<Character> boardCol[] = new LinkedList[cols];
-        
-        String winner;
-        
         
         int gamemode=selectGameMode();
         
