@@ -19,7 +19,7 @@ public class PlayerConnectFour {
     
 
     
-    public int addPlayer(Player player, ListInterface<Player> PlayerList, CircularLinkedList<Token> CirStr,int gamemode){
+    public void addPlayer(Player player, ListInterface<Player> PlayerList, CircularLinkedList<Token> CirStr,int gamemode){
         
         int numOfPlayer = 0;
         int check = 0;
@@ -112,7 +112,6 @@ public class PlayerConnectFour {
             }  
         }while("".equals(playerName));  
         
-      return numOfPlayer;
     }
     
     public String[] retrievePlayerForEachRound(ListInterface<Player> PlayerList,ListInterface<Player> winnerList,int round){
@@ -202,4 +201,6 @@ public class PlayerConnectFour {
         }
         return !(name.length() < 0 || !currentName.matches(regexName) || (check == -1)) ;
     }
+    
+    
 }

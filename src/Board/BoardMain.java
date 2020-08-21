@@ -73,7 +73,9 @@ public class BoardMain {
         
         int gamemode=selectGameMode();
         
-        numOfPlayer = play.addPlayer(playerN, PlayerList, CirStr,gamemode);
+        play.addPlayer(playerN, PlayerList, CirStr,gamemode);
+        
+        numOfPlayer = PlayerList.getLength();
         
         tour.initialize(PlayerList);
         
