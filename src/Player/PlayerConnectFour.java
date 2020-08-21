@@ -155,7 +155,7 @@ public class PlayerConnectFour {
             
             if(PlayerList.getEntry(i).getName().equals(playerName)){
                 playerScore = PlayerList.getEntry(i).getScore();
-                double score = (double) (min/tokenCount)*100;
+                double score = (double) ((tokenCount/min)*100);
                 
                  if(playerScore == 0){
                         PlayerList.getEntry(i).setScore(score);

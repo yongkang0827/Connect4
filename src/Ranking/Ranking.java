@@ -5,6 +5,7 @@
  */
 package Ranking;;
 import Player.*;
+import Board.BoardMain;
 
 /**
  *
@@ -75,15 +76,16 @@ public class Ranking implements Comparable<Ranking> {
     }
     
     public void displayRanking(){
+        BoardMain board = new BoardMain();
         //title
-        drawLine(12,28);
+        board.drawLine(12,28);
         System.out.println(String.format("%37s","Ranking"));
-        drawLine(12,28);
+        board.drawLine(12,28);
         
-        drawLine(52,9);     
+        board.drawLine(52,9);     
         System.out.println(String.format("%28s %d","Total player     : ", this.playerNum));
         System.out.println(String.format("%28s %.2f minutes","Total time spent : ", this.totalTime));
-        drawLine2(52,9);
+        board.drawLine2(52,9);
         System.out.println(String.format("%13s %14s %30s","Rank","Winner","Score"));
         System.out.println(String.format("%14s %14s %30s","-----","-------","------"));
         
@@ -96,35 +98,13 @@ public class Ranking implements Comparable<Ranking> {
         }
         
         System.out.print("\n");
-        drawLine2(52,9);
+        board.drawLine2(52,9);
         
         System.out.println(String.format("%40s %.2f !","The highest score is ",this.highestScore));
         System.out.println(String.format("%20s %s %s !"," ", "Congratulations ",this.winner));
         
         System.out.print("\n");
-        drawLine(52,9);
-    }
-    
-    public static void drawLine(int length, int space){
-        String line = "";
-        for(int i = 0; i < space; i++){
-            line += " ";
-        }
-        for(int i = 0; i < length; i++){
-            line += "=";
-        }
-        System.out.println(line);
-    }
-    
-    public static void drawLine2(int length, int space){
-        String line = "";
-        for(int i = 0; i < space; i++){
-            line += " ";
-        }
-        for(int i = 0; i < length; i++){
-            line += "-";
-        }
-        System.out.println(line);
+        board.drawLine(52,9);
     }
     
    public void clone(Ranking ranking){
