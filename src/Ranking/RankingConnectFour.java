@@ -27,7 +27,12 @@ public class RankingConnectFour {
         System.out.print("\n\n");
         board.drawLine(20,25);
         System.out.println(String.format("%41s","Ranking Board"));
-        System.out.println(String.format("%30s %d Player )","(", playerNum));
+        
+        if(playerNum > 4)
+            System.out.println(String.format("%25s More than 5 Player )","("));
+        else
+            System.out.println(String.format("%30s %d Player )","(", playerNum));
+            
         board.drawLine(20,25);
         
    
@@ -40,7 +45,8 @@ public class RankingConnectFour {
         
         for(int i = rankingList.getLength() - 1; i >= 0 ; i-- ){
             if(j <= 10){
-                if(rankingList.getEntry(i).getPlayerNum() == playerNum){
+                if(playerNum > 4){
+                    if(rankingList.getEntry(i).getPlayerNum() > 5){
                         System.out.println(String.format("%12d %-8s %-31s %d",
                            (j), 
                            " ",
@@ -48,6 +54,17 @@ public class RankingConnectFour {
                            (int)rankingList.getEntry(i).getHighestScore()
                         ));
                         j++;
+                    }  
+                }else{
+                    if(rankingList.getEntry(i).getPlayerNum() == playerNum){
+                            System.out.println(String.format("%12d %-8s %-31s %d",
+                               (j), 
+                               " ",
+                               rankingList.getEntry(i).getWinner(), 
+                               (int)rankingList.getEntry(i).getHighestScore()
+                            ));
+                            j++;
+                    }
                 }
             }else{
                 break;
@@ -71,6 +88,7 @@ public class RankingConnectFour {
         System.out.println(String.format("%23s %16s","(2)","3 Player Ranking Board"));
         System.out.println(String.format("%23s %16s","(3)","4 Player Ranking Board"));
         System.out.println(String.format("%23s %16s","(4)","5 Player Ranking Board"));
+        System.out.println(String.format("%23s %16s","(5)","More than 5 Player"));
         board.drawLine2(28,20);
   
     }
@@ -179,10 +197,10 @@ public class RankingConnectFour {
         
         do{
             try{
-                System.out.print(String.format("%52s","Please select your option (1 - 4): "));
+                System.out.print(String.format("%52s","Please select your option (1 - 5): "));
                 boardPlayerNum = scan.nextInt();
 
-                if(boardPlayerNum < 1 || boardPlayerNum > 4){
+                if(boardPlayerNum < 1 || boardPlayerNum > 5){
                     System.out.println(String.format("%45s","Invalid Input Detected!"));
                 }
             }
@@ -190,7 +208,7 @@ public class RankingConnectFour {
                 System.out.println(String.format("%49s","Input Must be Positive Integer"));
                 scan.next();
             }
-        }while(boardPlayerNum < 1 || boardPlayerNum > 4);
+        }while(boardPlayerNum < 1 || boardPlayerNum > 5);
         
         r.displayRankingBoard(rankingList, (boardPlayerNum+1));
     }
