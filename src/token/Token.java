@@ -16,7 +16,6 @@ public class Token{
     private String name;
     private char token;
     private int count;
-    private int allCount;
     
     public Token() {
     }
@@ -27,10 +26,6 @@ public class Token{
 
     public Token(char token) {
         this.token = token;
-    }
-
-    public Token(int allCount) {
-        this.allCount = allCount;
     }
 
     public Token(String name, char token, int count) {
@@ -64,19 +59,9 @@ public class Token{
         return count;
     }
 
-    public void setAllCount(int allCount) {
-        this.allCount = allCount;
-    }
-
-    
-    
-    public int getAllCount() {
-        return allCount;
-    }
-
     @Override
     public String toString() {
-        return "Token{" + "name=" + name + ", token=" + token + ", count=" + count + ", allCount=" + allCount + '}';
+        return "Token{" + "name=" + name + ", token=" + token + ", count=" + count + '}';
     }  
 }
   
