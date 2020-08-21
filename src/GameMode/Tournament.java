@@ -22,8 +22,6 @@ import token.TokenCount;
  */
 public class Tournament{
 
-
-
     private static BinaryTree tree;
     static int size;
     public Tournament(){
@@ -31,7 +29,17 @@ public class Tournament{
         size=7;
     }
     
- 
+//         public static void main(String args[]) {
+//             BinaryTree tree=new BinaryTree();
+//             tree.addRoot("tt");
+//             tree.addChild(2, 3);
+//             tree.nextLeft();
+//             tree.addChild(4, 5);
+//             tree.displayPost(tree.topRoot());
+//             tree.replace(7, 3);
+//             tree.displayPost(tree.topRoot());
+//         }
+        //use to create tree and node
         public  static void initialize(ListInterface<Player> player){
             int i=0;
             tree.addRoot(null);
@@ -128,8 +136,8 @@ public class Tournament{
             }
             tree.searchNode(current+1);
             if(player.getName()==((Player)tree.getRoot().getRight().getData()).getName())
-                tree.getRoot().setData(tree.getRoot().getRight().getData());
-            else tree.getRoot().setData(tree.getRoot().getLeft().getData());
+                tree.replace(tree.getRoot().getRight().getData(),current+1);
+            else tree.replace(tree.getRoot().getLeft().getData(),current+1);
             
             
         }
@@ -138,35 +146,5 @@ public class Tournament{
             tree.clear();
         }
         
-    public  BinaryTree.Node group(int n){
-        
-        if(n==1)
-            return first();
-        else if(n==2)
-            return second();
-        else if(n==3)
-            return third();
-        else if(n==4)
-            return fourth();
-        
-        return tree.getX();
-    }
-        
-    public  BinaryTree.Node first(){
-        return tree.travelLeft(2);
-    }
-
-        public  BinaryTree.Node second(){
-            tree.travelLeft(2);
-        return tree.beside();
-    }
-
-        public  BinaryTree.Node third(){
-            tree.travelRight(2);
-            return tree.besidel();
-        }
-        
-        public  BinaryTree.Node fourth(){
-            return tree.travelRight(2);
-        }
+    
 }

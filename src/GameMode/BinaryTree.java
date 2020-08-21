@@ -10,12 +10,12 @@ package GameMode;
  */
 
 public class BinaryTree <T> implements BinaryTreeInterface<T>{
-        private Node root;
+        private Node root;//means the current node
         private Node left;
         private Node right;
-        private Node topRoot;
+        private Node topRoot;//the top root of the tree
         private Node parent;
-        private Node x=new Node("Node not exist ");
+        private Node error=new Node("Node not exist ");
        static int nextPosition;
         public BinaryTree(){
         clear();
@@ -24,78 +24,76 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
         topRoot=root;
         }
     
-    class Node<T>{
-    private T data;
-    private int position;
-    private Node parent;
-    private Node left;
-    private Node right;
+            class Node<T>{
+            private T data;
+            private int position;
+            private Node parent;
+            private Node left;
+            private Node right;
 
-		
-// Constructs a new node to store the given data value.     
 
-        private Node(T data) {
-            this.data = data;
-            this.position=nextPosition;
-            this.left = null;
-            this.right = null;
-            nextPosition++;
-        }
+        // Constructs a new node to store the given data value.     
 
-        private Node(T data,Node parent,Node left,Node right){
-            this.data = data;
-            this.parent=parent;
-            this.left = left;
-            this.right = right;
-            this.position=nextPosition;
-            nextPosition++;
-        }
-        
-        
+                private Node(T data) {
+                    this.data = data;
+                    this.position=nextPosition;
+                    this.left = null;
+                    this.right = null;
+                    nextPosition++;
+                }
 
-        public T getData() {
-            if(data==null)
-                return (T)"-";
-            return data;
-        }
+                private Node(T data,Node parent,Node left,Node right){
+                    this.data = data;
+                    this.parent=parent;
+                    this.left = left;
+                    this.right = right;
+                    this.position=nextPosition;
+                    nextPosition++;
+                }
 
-        public void setData(T data) {
-            this.data = data;
-        }
 
-        public Node getParent() {
-            return parent;
-        }
 
-        public void setParent(Node parent) {
-            this.parent = parent;
-        }
+                public T getData() {
+                    if(data==null)
+                        return (T)"-";
+                    return data;
+                }
 
-        public Node getLeft() {
-            return left;
-        }
+                public void setData(T data) {
+                    this.data = data;
+                }
 
-        public void setLeft(Node left) {
-            this.left = left;
-        }
+                public Node getParent() {
+                    return parent;
+                }
 
-        public Node getRight() {
-            return right;
-        }
+                public void setParent(Node parent) {
+                    this.parent = parent;
+                }
 
-        public void setRight(Node right) {
-            this.right = right;
-        }
+                public Node getLeft() {
+                    return left;
+                }
 
-        public int getPosition() {
-            return position;
-        }
-    }
-        
-        
+                public void setLeft(Node left) {
+                    this.left = left;
+                }
 
-    public Node getX() {
-        return x;
+                public Node getRight() {
+                    return right;
+                }
+
+                public void setRight(Node right) {
+                    this.right = right;
+                }
+
+                public int getPosition() {
+                    return position;
+                }
+            }
+
+    public Node getError() {
+        return error;
     }
 
     public Node getTopRoot() {
@@ -108,16 +106,14 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
 
     public Node getRoot() {
         if(root==null)
-            return x;
+            return error;
         else return root;
     }
 
     public void setRoot(Node root) {
         this.root = root;
     }
-
-
-        
+   
       public void addRoot(T newEntry){
        if(root==null){
        root=new Node(newEntry);
@@ -147,102 +143,127 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
         }else System.out.print("Please add root first");
    } 
     
-  
-    
-    public void searchNode(int n){
-        searchNodeRecursive(topRoot,n);
-    }
-    
-    public void searchNodeRecursive(Node node,int n){
+    public void searchNodeRecursive(Node node,int positon){
         if(node==null){
             return;}
         
-        if(n==node.getPosition()){
+        if(positon==node.getPosition()){
             root=node;
            }
-        searchNodeRecursive(node.getLeft(),n);
-        searchNodeRecursive(node.getRight(),n);     
+        searchNodeRecursive(node.getLeft(),positon);
+        searchNodeRecursive(node.getRight(),positon);     
     }
     
-    public void printNode(int n){
-        searchNodeRecursive(topRoot,n);
+    public void searchNode(int position){
+        searchNodeRecursive(topRoot,position);
+    }
+    
+    public void printNode(int positon){
+        searchNodeRecursive(topRoot,positon);
         System.out.print(root.getData()+"\n"); 
     }
     
-        public boolean isRoot(Node p) {
-        return p == getTopRoot();
+    public boolean contains(T entry){
+        for(int i=0;i<nextPosition;i++){
+            searchNode(i);
+            if(entry==root.getData())
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean replace(T entry,int position){
+        boolean replace=false;
+            
+        searchNode(position);
+        if(root!=null){
+        root.setData(entry);
+        replace=true;
         }
         
-        public void clear(){
-//                clearNode(topRoot);
-            topRoot=null;
-        }
+        return replace;
+    }
+    
+    public boolean isRoot(Node node) {
+        return node == getTopRoot();
+    }
         
-         public boolean isEmpty() {
+    public void clear(){
+        topRoot=null;
+    }
+        
+    public boolean isEmpty() {
         return nextPosition == 1;
     }
-         public int size(){
-             return nextPosition-1;
-         }
+    
+    public int size(){
+        return nextPosition-1;
+    }
          
-         public Node root(){
-             return topRoot;
-         }
+    public Node root(){
+        return topRoot;
+    }
          
-         public int layer(Node node){
+    public int layer(Node node){
              
-             if (node == topRoot) 
-            return 1; 
+        if (node == topRoot) 
+        return 1; 
              
-         return 1+layer(node.parent);
-         }
+        return 1+layer(node.parent);
+    }
         
-        public int depth(Node node){
+    public int depth(Node node){
              
-             if (node == null) 
-            return 0; 
+        if (node == null) 
+        return 0; 
              
-         return 1+depth(node.left);
-         }
+        return 1+depth(node.left);
+    }
  
         
-        public void displayPost(Node node){
-            if(node==null){
-            return;}
-           
-            displayPost(node.getLeft());
-            displayPost(node.getRight());  
-        System.out.print(node.getData()+"\n");           
+    public void displayPost(Node node){
+        if(node==null){
+        return;
         }
+           
+        displayPost(node.getLeft());
+        displayPost(node.getRight());  
+        System.out.print(node.getData()+"\n");           
+    }
         
 
         
-        public void displayPre(Node node){
-            if(node==null){
-            return;}
-           System.out.print(node.getData()+"\n");  
-            displayPre(node.getLeft());
-            displayPre(node.getRight());        
+    public void displayPre(Node node){
+        if(node==null){
+            return;
         }
+           
+        System.out.print(node.getData()+"\n");  
+        displayPre(node.getLeft());
+        displayPre(node.getRight());        
+    }
     
-        public void displayIn(Node node){
-            if(node==null){
-            return;}
-            
-            displayIn(node.getLeft());
-            System.out.print(node.getData()+"\n"); 
-            displayIn(node.getRight());        
+    public void displayIn(Node node){
+        if(node==null){
+            return;
         }
+            
+        displayIn(node.getLeft());
+        System.out.print(node.getData()+"\n"); 
+        displayIn(node.getRight());        
+    }
         
-        public Node travelLeft(int n){
+    //travel the current node to left side of n layer
+    public Node travelLeft(int n){
             topRoot();
             for(int i=0;i<n;i++){
                 nextLeft();
             }
             return root;
         }
-        
-        public Node travelRight(int n){
+         
+    //travel the current node to right side of n layer
+    public Node travelRight(int n){
             topRoot();
             for(int i=0;i<n;i++){
                 nextRight();
@@ -250,68 +271,49 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
             return root;
         }
         
-        public Node nextLeft(){
+         //travel the current node to left side of next layer
+    public Node nextLeft(){
         parent=root;
         root=getRoot().getLeft();
         return root;
     }
     
+    //travel the current node to right side of next layer
     public Node nextRight(){
         parent=root;
         root=getRoot().getRight();
         return root;
     }
     
+    //travel the current node to right side which has same parent
     public Node beside(){
         previous();
         nextRight();
     return root;
     }
     
-        public Node besidel(){
+    //travel the current node to left side which has same parent
+    public Node besidel(){
         previous();
         nextLeft();
     return root;
         }
 
+    //travel the current node to parent node
     public Node previous(){
         root=parent;
         return root;
     }
         
-        public Node topRoot(){
+    //travel to the top node
+    public Node topRoot(){
         root=topRoot;
         return root;
     }
-        
-        /*public Node bottomLeft(){
-            bottomLeftRecursive(topRoot);
-            previous();
-            previous();
-            return root;
-        }
-        public void bottomLeftRecursive(Node node){
-           if(node==null){
-               //root=parent;
-            return ;}
-           
-            bottomLeftRecursive(nextLeft());
-            //displayPost(node.getRight());  
- 
-
-        }
-        
-        /*public void bottomRight(){
-            topRoot();
-            while(root!=null){
-                nextRight();
-            }
-            previous();
-        }*/
 
     public Node getLeft() {
         if(root.getLeft()==null)
-            return x;
+            return error;
         else return root.getLeft();
     }
 
@@ -321,7 +323,7 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
 
     public Node getRight() {
         if(root.getRight()==null)
-            return x;
+            return error;
         else return root.getRight();
     }
 
