@@ -66,7 +66,6 @@ public class BoardMain {
         String currentPlayer[];
         char currentToken[] = new char[2];
         
-        LinkedList<Board> boardCol[] = new LinkedList[cols]; //-- new Add
         
         String winner;
         
