@@ -42,6 +42,7 @@ public class BoardMain {
     }
     
     public void Game(SortedLinkedList<Ranking> rankingList){
+        
         Player playerN = new Player();
         ListInterface<Player> PlayerList = new ArrayList<>();
         ListInterface<Player> winnerList = new ArrayList<>();
@@ -64,6 +65,8 @@ public class BoardMain {
         double totalTime = 0; // total time for all round
         String currentPlayer[];
         char currentToken[] = new char[2];
+        
+        LinkedList<Board> boardCol[] = new LinkedList[cols]; //-- new Add
         
         String winner;
         
@@ -89,7 +92,7 @@ public class BoardMain {
         currentToken[1] = token.retrieveToken(currentPlayer[1], CirStr);      
         
         System.out.println(currentPlayer[0] + " >> "+ currentPlayer[1]);
-        ConnectFourBoard mainBoard = new ConnectFourBoard(currentPlayer, currentToken);
+        Board mainBoard = new Board(currentPlayer, currentToken);
         mainBoard.createNewBoard(rows, cols);
         mainBoard.setTime();
         startTime = mainBoard.getTime();

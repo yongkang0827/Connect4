@@ -12,20 +12,22 @@ package Board;
 
 import java.util.Scanner;
 
-public class ConnectFourBoard {
+public class Board {
     Scanner scan = new Scanner(System.in);
     
     double time; 
     int rows;
     int cols;
+    
     LinkedList<Character> boardCol[] = new LinkedList[cols];
+    
     int insertTokenPosition = 0;
     int turn = 1;
-    boolean assignSuccess;
+    
     String currentPlayer[] = new String[2];
     char currentToken[] = new char[2]; 
     
-    public ConnectFourBoard(String player[], char tokenChar[]) {
+    public Board(String player[], char tokenChar[]) {
         this.currentPlayer = player;
         this.currentToken = tokenChar;
     }
@@ -37,6 +39,55 @@ public class ConnectFourBoard {
     public void setTime() {
         this.time = System.currentTimeMillis();
     }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public void setCols(int cols) {
+        this.cols = cols;
+    }
+
+    public int getInsertTokenPosition() {
+        return insertTokenPosition;
+    }
+
+    public void setInsertTokenPosition(int insertTokenPosition) {
+        this.insertTokenPosition = insertTokenPosition;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
+
+    public String[] getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public char[] getCurrentToken() {
+        return currentToken;
+    }
+    
+    public void setCurrentPlayer(String[] currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public void setCurrentToken(char[] currentToken) {
+        this.currentToken = currentToken;
+    }
+
     
     public void createNewBoard(int rows, int cols){
         this.rows = rows;
@@ -119,6 +170,7 @@ public class ConnectFourBoard {
    
     //--- save the token inserted position into linked list ----//
     public void assignToken(){
+        boolean assignSuccess;
         int replaceRow = rows; 
         Character entry;
         do{
