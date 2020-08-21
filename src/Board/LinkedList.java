@@ -141,13 +141,19 @@ public class LinkedList<T> implements ListInterface<T> {
         Node tempNode = node;
 
         while (tempNode != null) {
-          if (anEntry.equals(tempNode.data)) {
-            return true;
-          } else {
-            tempNode = tempNode.next;
-          }
+            if (equals(anEntry, (T)tempNode.data)){
+                return true;
+            }else{
+                tempNode = tempNode.next;
+            }
         }
-        return false;
+           
+            return false;
+   }
+    
+    @Override
+    public boolean equals(T anEntry, T nodeData) {
+        return anEntry.equals(nodeData);
     }
 
     

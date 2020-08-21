@@ -23,6 +23,8 @@ public interface ListInterface<T> {
   public T getEntry(int givenPosition); 
 
   public boolean contains(T anEntry);
+  
+  public boolean equals(T anEntry, T nodeData);
 
   public int getLength(); 
 
