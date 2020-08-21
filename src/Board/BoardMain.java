@@ -63,7 +63,7 @@ public class BoardMain {
         double startTime, timeTaken;
         double totalTime = 0; // total time for all round
         String currentPlayer[];
-        char currentToken[] = {'K', 'T'};
+        char currentToken[] = new char[2];
         
         String winner;
         
