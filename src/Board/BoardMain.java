@@ -65,7 +65,7 @@ public class BoardMain {
         double totalTime = 0; // total time for all round
         String currentPlayer[];
         char currentToken[] = new char[2];
-        
+        LinkedList<Character> boardCol[] = new LinkedList[cols];
         
         String winner;
         
@@ -92,7 +92,8 @@ public class BoardMain {
         
         System.out.println(currentPlayer[0] + " >> "+ currentPlayer[1]);
         Board mainBoard = new Board(currentPlayer, currentToken);
-        mainBoard.createNewBoard(rows, cols);
+        mainBoard.setBoardCol(boardCol);
+        mainBoard.createNewBoard(rows);
         mainBoard.setTime();
         startTime = mainBoard.getTime();
         

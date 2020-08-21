@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Board;
 
 /**
@@ -17,9 +13,8 @@ public class Board {
     
     double time; 
     int rows;
-    int cols;
     
-    LinkedList<Character> boardCol[] = new LinkedList[cols];
+    LinkedList<Character> boardCol[]; 
     
     int insertTokenPosition = 0;
     int turn = 1;
@@ -48,12 +43,12 @@ public class Board {
         this.rows = rows;
     }
 
-    public int getCols() {
-        return cols;
+    public LinkedList<Character>[] getBoardCol() {
+        return boardCol;
     }
 
-    public void setCols(int cols) {
-        this.cols = cols;
+    public void setBoardCol(LinkedList<Character>[] boardCol) {
+        this.boardCol = boardCol;
     }
 
     public int getInsertTokenPosition() {
@@ -89,12 +84,10 @@ public class Board {
     }
 
     
-    public void createNewBoard(int rows, int cols){
+    public void createNewBoard(int rows){
         this.rows = rows;
-        this.cols = cols;
-        boardCol = new LinkedList[cols];
          
-         for(int j = 0; j < cols; j++){
+         for(int j = 0; j < boardCol.length; j++){
              boardCol[j] = new LinkedList();
             for(int i = 0; i < rows; i++){
                 boardCol[j].add('-');
@@ -106,14 +99,14 @@ public class Board {
         
         // display column number
         System.out.print("\n");
-        for(int j = 0; j < cols; j++){
+        for(int j = 0; j < boardCol.length; j++){
             System.out.print((j+1) +" ");
         } 
 
         //display board
         for(int i = 0; i < rows; i++){
             System.out.print("\n");
-            for(int j = 0; j < cols; j++){
+            for(int j = 0; j < boardCol.length; j++){
                 System.out.print(boardCol[j].getEntry(i)+" ");
                 
             }
@@ -146,7 +139,7 @@ public class Board {
 
         
         //check selected column for insert token
-        if(insertTokenPosition <= 0 || insertTokenPosition> cols){
+        if(insertTokenPosition <= 0 || insertTokenPosition> boardCol.length){
             System.out.println("Invalid column number! Pls try again...");
             return false;
         }else{
@@ -200,7 +193,7 @@ public class Board {
                 case 3:
                     //check for horizontal win
                     for(int i = rows - 1 ; i > 0; i--){
-                        for(int j = 0; j < cols - 2; j++){
+                        for(int j = 0; j < boardCol.length - 2; j++){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j+1].getEntry(i).equals(entry) 
@@ -211,7 +204,7 @@ public class Board {
                     }
                     
                     //check for vertical win
-                    for(int j = 0; j < cols; j++){
+                    for(int j = 0; j < boardCol.length; j++){
                         for(int i = 0; i < rows - 2; i++){
                             entry = boardCol[j].getEntry(i);
                             
@@ -224,7 +217,7 @@ public class Board {
                    
                     //check for diagonal win (+ve slope)
                     for(int i = rows - 1 ; i > 2; i--){
-                        for(int j = 0; j < cols - 2; j++){
+                        for(int j = 0; j < boardCol.length - 2; j++){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j+1].getEntry(i-1).equals(entry) 
@@ -236,7 +229,7 @@ public class Board {
                     
                     //check for diagonal win (-ve slope)
                     for(int i = rows - 1 ; i > 0; i--){
-                        for(int j = cols - 1; j > 1; j--){
+                        for(int j = boardCol.length - 1; j > 1; j--){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j-1].getEntry(i-1).equals(entry) 
@@ -250,7 +243,7 @@ public class Board {
                 case 5:
                     //check for horizontal win
                      for(int i = rows - 1 ; i > 0; i--){
-                        for(int j = 0; j < cols - 4; j++){
+                        for(int j = 0; j < boardCol.length - 4; j++){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j+1].getEntry(i).equals(entry) 
@@ -262,7 +255,7 @@ public class Board {
                     }
                     
                     //check for vertical win
-                      for(int j = 0; j < cols; j++){
+                      for(int j = 0; j < boardCol.length; j++){
                         for(int i = 0; i < rows - 4; i++){
                             entry = boardCol[j].getEntry(i);
                             
@@ -276,7 +269,7 @@ public class Board {
                       
                     //check for diagonal win (+ve slope)
                     for(int i = rows - 1 ; i > 3; i--){
-                        for(int j = 0; j < cols - 4; j++){
+                        for(int j = 0; j < boardCol.length - 4; j++){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j+1].getEntry(i-1).equals(entry) 
@@ -289,7 +282,7 @@ public class Board {
                       
                     //check for diagonal win (-ve slope)
                      for(int i = rows - 1 ; i > 3; i--){
-                        for(int j = cols - 1; j > 3; j--){
+                        for(int j = boardCol.length - 1; j > 3; j--){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j-1].getEntry(i-1).equals(entry) 
@@ -305,7 +298,7 @@ public class Board {
                     
                     //check for horizontal win
                     for(int i = rows - 1 ; i >= 0; i--){
-                        for(int j = 0; j < cols - 3; j++){
+                        for(int j = 0; j < boardCol.length - 3; j++){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j+1].getEntry(i).equals(entry) 
@@ -316,7 +309,7 @@ public class Board {
                     }
                     
                     //check for vertical win
-                    for(int j = 0; j < cols; j++){
+                    for(int j = 0; j < boardCol.length; j++){
                         for(int i = 0; i <= rows - 4; i++){
                             entry = boardCol[j].getEntry(i);
                             
@@ -329,7 +322,7 @@ public class Board {
                     
                     //check for diagonal win (+ve slope)
                     for(int i = rows - 1 ; i > 2; i--){
-                        for(int j = 0; j < cols - 3; j++){
+                        for(int j = 0; j < boardCol.length - 3; j++){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j+1].getEntry(i-1).equals(entry) 
@@ -340,7 +333,7 @@ public class Board {
                     }
                     //check for diagonal win (-ve slope)
                     for(int i = rows - 1 ; i > 2; i--){
-                        for(int j = cols - 1; j > 2; j--){
+                        for(int j = boardCol.length - 1; j > 2; j--){
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j-1].getEntry(i-1).equals(entry) 
@@ -360,7 +353,7 @@ public class Board {
     //---- check if all col full ---//
     public boolean isAllColFull(){
         
-        for(int j = 0; j < cols; j++){
+        for(int j = 0; j < boardCol.length; j++){
             for(int i = 0; i < rows; i++){
                 if( boardCol[j].getEntry(i) == '-'){
                     return false;
