@@ -75,7 +75,7 @@ public class ArrayList<T> implements ListInterface<T> {
     
     @Override
     public T getEntry(int givenPosition){
-       
+        
      if(!isEmpty()){
           if(givenPosition < 0 || givenPosition >= size){
            throw new IndexOutOfBoundsException();
@@ -84,7 +84,7 @@ public class ArrayList<T> implements ListInterface<T> {
            return arr[givenPosition];
        }
      }
-      
+     
      throw new IndexOutOfBoundsException();
    }
   
