@@ -12,10 +12,9 @@ import java.util.Scanner;
  */
 public class TokenCount {
     
-    public void addPlayer(String nam, char symbol1, CircularLinkedList<Token> cirStr){
+    public void addPlayer(String nam, CircularLinkedList<Token> cirStr){
         char symbol;
         int zero = 0;
-        boolean pass = false;
         
         Scanner scan = new Scanner(System.in);
         
