@@ -90,17 +90,17 @@ public class Ranking implements Comparable<Ranking> {
         System.out.println(String.format("%14s %14s %30s","-----","-------","------"));
         
         for(int i = 0; i < this.sortedPlayerList.getLength(); i++ ){
-            System.out.println(String.format("%12d %-8s %-31s %.2f",
+            System.out.println(String.format("%12d %-8s %-31s %d",
                     (i+1), 
                     " ",
                     this.sortedPlayerList.getEntry(i).getName(), 
-                    this.sortedPlayerList.getEntry(i).getScore()));
+                    (int)this.sortedPlayerList.getEntry(i).getScore()));
         }
         
         System.out.print("\n");
         board.drawLine2(52,9);
         
-        System.out.println(String.format("%40s %.2f !","The highest score is ",this.highestScore));
+        System.out.println(String.format("%40s %d !","The highest score is ",(int)this.highestScore));
         System.out.println(String.format("%20s %s %s !"," ", "Congratulations ",this.winner));
         
         System.out.print("\n");

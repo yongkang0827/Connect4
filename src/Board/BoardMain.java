@@ -277,7 +277,7 @@ public class BoardMain {
                 return 2;
 
         }
-    
+
     public void drawLine(int length, int space){
         String line = "";
         for(int i = 0; i < space; i++){
@@ -304,6 +304,7 @@ public class BoardMain {
         BoardMain boardMain = new BoardMain();
         RankingConnectFour rankingConnectFour = new RankingConnectFour();
         Scanner scan = new Scanner(System.in);
+        
         SortedLinkedList<Ranking> rankingList = rankingConnectFour.prevGameRecord();
 
         int menuSelection = 0;
@@ -346,7 +347,7 @@ public class BoardMain {
 
                 case 2:
                     //Ranking
-                    rankingConnectFour.leaderBoard(rankingList);
+                    rankingConnectFour.rankingBoard(rankingList);
                     break;
                 case 3:
                     //Exit
