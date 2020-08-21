@@ -10,13 +10,14 @@ package Player;
  * @author User
  */
 public interface ListInterface<T> {
-    /**
-   * Task: Adds a new entry to the end of the list. Entries currently in the
-   * list are unaffected. The list's size is increased by 1.
-   *
-   * @param newEntry the object to be added as a new entry
-   * @return true if the addition is successful, or false if the list is full
-   */
+    
+  /**
+  * Task: Adds a new entry to the end of the list. Entries currently in the
+  * list are unaffected. The list's size is increased by 1.
+  *
+  * @param newEntry the object to be added as a new entry
+  * @return true if the addition is successful, or false if the list is full
+  */
   public boolean add(T newEntry);
 
   /**
@@ -81,6 +82,7 @@ public interface ListInterface<T> {
    * @return a data of the list in given position
    */
   public String subList(int start, int end);
+  
   /**
    * Task: Sees whether the list contains a given entry.
    *
@@ -110,16 +112,17 @@ public interface ListInterface<T> {
    */
   public boolean isFull();
   
-   /**
-   * Task: To get the position of the current entry
-   * @param anEntry the object that is the desired entry
-   * @return the position of anEntry
-   */
+  /**
+  * Task: To get the position of the current entry
+  * @param anEntry the object that is the desired entry
+  * @return the position of anEntry
+  */
   public int indexOf(T anEntry);
   
-   /**
-   * Task: Sees whether the list meet the size assigned
-   * @return true is the size = array length, else false
-   */
+  /**
+  * Task: Sees whether the list meet the size assigned
+  * @return true is the size = array length, else false
+  */
   public boolean isArrayFull();
+  
 }
