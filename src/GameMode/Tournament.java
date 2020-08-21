@@ -29,16 +29,7 @@ public class Tournament{
         size=7;
     }
     
-//         public static void main(String args[]) {
-//             BinaryTree tree=new BinaryTree();
-//             tree.addRoot("tt");
-//             tree.addChild(2, 3);
-//             tree.nextLeft();
-//             tree.addChild(4, 5);
-//             tree.displayPost(tree.topRoot());
-//             tree.replace(7, 3);
-//             tree.displayPost(tree.topRoot());
-//         }
+
         //use to create tree and node
         public  static void initialize(ListInterface<Player> player){
             int i=0;
