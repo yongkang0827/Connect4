@@ -24,7 +24,7 @@ public interface BinaryTreeInterface<T> {
     public int size();//return the total node in the tree
     public BinaryTree.Node root();// return the top root of the tree
     public int layer(BinaryTree.Node node);//display which is the layer of node given
-    public int depth(BinaryTree.Node node);//display the total layer in the tree
+    public int depth();//display the total layer in the tree
     public void displayPost(BinaryTree.Node node); //binary search tree in postorder form
     public void displayPre(BinaryTree.Node node);//binary search tree in preorder form
     public void displayIn(BinaryTree.Node node);//binary search tree in inorder form

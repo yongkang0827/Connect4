@@ -211,13 +211,17 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
              
         return 1+layer(node.parent);
     }
+    
+    public int depth(){
+        return depthRecursive(topRoot);
+    }
         
-    public int depth(Node node){
+    public int depthRecursive(Node node){
              
         if (node == null) 
         return 0; 
              
-        return 1+depth(node.left);
+        return 1+depthRecursive(node.left);
     }
  
         
