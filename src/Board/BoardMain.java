@@ -5,7 +5,7 @@
  */
 package Board;
 
-import GameMode.GameMode;
+import GameMode.GameModeConnect4;
 import GameMode.Tournament;
 import Player.ArrayList;
 import Player.Player;
@@ -68,7 +68,8 @@ public class BoardMain {
         char currentToken[] = new char[2];
         LinkedList<Character> boardCol[] = new LinkedList[cols];
         
-        int gamemode=selectGameMode();
+        GameModeConnect4 mode=new GameModeConnect4();
+        int gamemode=mode.selectGameMode();
         
         play.addPlayer(playerN, PlayerList, CirStr,gamemode);
         
@@ -76,9 +77,10 @@ public class BoardMain {
         
         tour.initialize(PlayerList);
         
-        if(gamemode==1)
+        
         play.displayPlayerDetails(PlayerList, CirStr);
-        else tour.display();
+        if(gamemode==2)
+        tour.display();
         
         
         connectNum = setConnectNum();
@@ -229,53 +231,7 @@ public class BoardMain {
         
     }
     
-    public static int selectGameMode(){
-        GameMode[] gamemode={
-        new GameMode(1,"Classic Mode","Up to User"),
-        new GameMode(2,"Tournament Mode","Must 4 / 8 Players")
-        };
-        
-        Scanner scan = new Scanner(System.in);
-         boolean validSelection;
-        char selectConnectNum = 2;
-        do{
-            System.out.println("\n Please select your Game Mode   ");
-            System.out.println(" ===================  ");
-            for(int i=0;i<gamemode.length;i++){
-                System.out.println("("+gamemode[i].getID() +") "+gamemode[i].getName()+"   (Player Allow :" + gamemode[i].getRule()+")");
-                
-            }
-            System.out.print(" Pls enter the mode number (1/2) : ");
-            String selection = scan.nextLine();
-
-            if(selection.compareTo("") == 0){
-                System.out.println("Pls enter a mode selection ...");
-               validSelection = false;
-               
-            }else{
-                selectConnectNum = selection.charAt(0);
-            
-                if(!Character.isDigit(selectConnectNum)){
-                    System.out.println("\nNOT A NUMBER ! ");
-                    validSelection = false;
-                }else if( Character.getNumericValue(selectConnectNum) < 1 || Character.getNumericValue(selectConnectNum) > 2){
-                    System.out.println("\nInvalid Selection ! Must 1 / 2  ... ");
-                    validSelection = false;
-                }else{
-                    validSelection = true;
-                }
-            }
-            
-            
-            
-        }while( !validSelection);
-            
-            if(Character.getNumericValue(selectConnectNum)==1)
-                return 1;
-            else
-                return 2;
-
-        }
+    
 
     public void drawLine(int length, int space){
         String line = "";

@@ -28,7 +28,6 @@ public class Tournament{
         tree=new BinaryTree();
         size=7;
     }
-    
 
         //use to create tree and node
         public  static void initialize(ListInterface<Player> player){

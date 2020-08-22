@@ -274,30 +274,37 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
          //travel the current node to left side of next layer
     public Node nextLeft(){
         parent=root;
+        if(getRoot().getLeft()!=null){
         root=getRoot().getLeft();
         return root;
+        }
+        
+        return error;
     }
     
     //travel the current node to right side of next layer
     public Node nextRight(){
         parent=root;
+        if(getRoot().getRight()!=null){
         root=getRoot().getRight();
         return root;
+        }
+        
+        return error;
     }
     
     //travel the current node to right side which has same parent
     public Node beside(){
+        Node current=root;
         previous();
-        nextRight();
-    return root;
+
+        if(current.equals(nextRight())){
+            previous();
+            nextLeft();
+        }
+        return root;
     }
     
-    //travel the current node to left side which has same parent
-    public Node besidel(){
-        previous();
-        nextLeft();
-    return root;
-        }
 
     //travel the current node to parent node
     public Node previous(){
