@@ -224,37 +224,46 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
         return 1+depthRecursive(node.left);
     }
  
-        
-    public void displayPost(Node node){
+    public void displayPost(){
+        postRecursive(topRoot);
+    }
+    
+    public void postRecursive(Node node){
         if(node==null){
         return;
         }
            
-        displayPost(node.getLeft());
-        displayPost(node.getRight());  
+        postRecursive(node.getLeft());
+        postRecursive(node.getRight());  
         System.out.print(node.getData()+"\n");           
     }
         
-
+    public void displayPre(){
+        preRecursive(topRoot);
+    }
         
-    public void displayPre(Node node){
+    public void preRecursive(Node node){
         if(node==null){
             return;
         }
            
         System.out.print(node.getData()+"\n");  
-        displayPre(node.getLeft());
-        displayPre(node.getRight());        
+        preRecursive(node.getLeft());
+        preRecursive(node.getRight());        
     }
     
-    public void displayIn(Node node){
+    public void displayIn(){
+        inRecursive(topRoot);
+    }
+    
+    public void inRecursive(Node node){
         if(node==null){
             return;
         }
             
-        displayIn(node.getLeft());
+        inRecursive(node.getLeft());
         System.out.print(node.getData()+"\n"); 
-        displayIn(node.getRight());        
+        inRecursive(node.getRight());        
     }
         
     //travel the current node to left side of n layer
