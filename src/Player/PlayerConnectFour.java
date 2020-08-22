@@ -92,7 +92,7 @@ public class PlayerConnectFour {
                     PlayerList.add(player);
                 
                     TokenCount tok = new TokenCount();
-                    tok.addPlayer(playerName, CirStr);   
+                    tok.addToken(playerName, CirStr);   
                 
                     for(int j = 0; j < PlayerList.getLength(); j++){
                    
