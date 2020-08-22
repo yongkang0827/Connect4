@@ -12,7 +12,7 @@ package Board;
 public class LinkedList<T> implements ListInterface<T> {
 
     private Node node; // based on col
-    private int length; // row
+    private int length; // represent row
  
     public LinkedList() {
         clear();
@@ -167,7 +167,6 @@ public class LinkedList<T> implements ListInterface<T> {
     public boolean isEmpty() { 
         return length == 0;
     }
-
     
     @Override
     public boolean isFull() {  

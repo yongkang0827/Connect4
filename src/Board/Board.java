@@ -19,8 +19,8 @@ public class Board {
     int insertTokenPosition = 0;
     int turn = 1;
     
-    String currentPlayer[] = new String[2];
-    char currentToken[] = new char[2]; 
+    String currentPlayer[]; 
+    char currentToken[]; 
     
     public Board(String player[], char tokenChar[]) {
         this.currentPlayer = player;
@@ -154,7 +154,8 @@ public class Board {
                 }
             } 
             if(isColFull == 0){
-                System.out.println("Col " +insertTokenPosition+" is full ! Pls proceed to another row ! ");
+                System.out.println("Col " +insertTokenPosition+" is full ! "
+                        + "Pls proceed to another row ! ");
                 return false;
             }
         }
@@ -247,7 +248,8 @@ public class Board {
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j+1].getEntry(i).equals(entry) 
-                                    && boardCol[j+2].getEntry(i).equals(entry) && boardCol[j+3].getEntry(i).equals(entry)
+                                    && boardCol[j+2].getEntry(i).equals(entry) 
+                                    && boardCol[j+3].getEntry(i).equals(entry)
                                     && boardCol[j+4].getEntry(i).equals(entry)){
                                 return turn;
                             }
@@ -260,7 +262,8 @@ public class Board {
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j].getEntry(i+1).equals(entry) 
-                                    && boardCol[j].getEntry(i+2).equals(entry) && boardCol[j].getEntry(i+3).equals(entry)
+                                    && boardCol[j].getEntry(i+2).equals(entry) 
+                                    && boardCol[j].getEntry(i+3).equals(entry)
                                     && boardCol[j].getEntry(i+4).equals(entry)){
                                 return turn;
                             }
@@ -273,7 +276,8 @@ public class Board {
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j+1].getEntry(i-1).equals(entry) 
-                                    && boardCol[j+2].getEntry(i-2).equals(entry) && boardCol[j+3].getEntry(i-3).equals(entry)
+                                    && boardCol[j+2].getEntry(i-2).equals(entry) 
+                                    && boardCol[j+3].getEntry(i-3).equals(entry)
                                     && boardCol[j+4].getEntry(i-4).equals(entry)){
                                 return turn;
                             }
@@ -286,8 +290,9 @@ public class Board {
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j-1].getEntry(i-1).equals(entry) 
-                                    && boardCol[j-2].getEntry(i-2).equals(entry) && boardCol[j-3].getEntry(i-3).equals(entry)
-                                     && boardCol[j-4].getEntry(i-4).equals(entry)){
+                                    && boardCol[j-2].getEntry(i-2).equals(entry) 
+                                    && boardCol[j-3].getEntry(i-3).equals(entry)
+                                    && boardCol[j-4].getEntry(i-4).equals(entry)){
                                 return turn;
                             }
                         }
@@ -302,7 +307,8 @@ public class Board {
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j+1].getEntry(i).equals(entry) 
-                                    && boardCol[j+2].getEntry(i).equals(entry) && boardCol[j+3].getEntry(i).equals(entry)){
+                                    && boardCol[j+2].getEntry(i).equals(entry) 
+                                    && boardCol[j+3].getEntry(i).equals(entry)){
                                 return turn;
                             }
                         }
@@ -314,7 +320,8 @@ public class Board {
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j].getEntry(i+1).equals(entry) 
-                                    && boardCol[j].getEntry(i+2).equals(entry) && boardCol[j].getEntry(i+3).equals(entry)){
+                                    && boardCol[j].getEntry(i+2).equals(entry) 
+                                    && boardCol[j].getEntry(i+3).equals(entry)){
                                 return turn;
                             }
                         }
@@ -326,7 +333,8 @@ public class Board {
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j+1].getEntry(i-1).equals(entry) 
-                                    && boardCol[j+2].getEntry(i-2).equals(entry) && boardCol[j+3].getEntry(i-3).equals(entry)){
+                                    && boardCol[j+2].getEntry(i-2).equals(entry) 
+                                    && boardCol[j+3].getEntry(i-3).equals(entry)){
                                 return turn;
                             }
                         }
@@ -337,7 +345,8 @@ public class Board {
                             entry = boardCol[j].getEntry(i);
                             
                             if( !(entry.equals('-')) && boardCol[j-1].getEntry(i-1).equals(entry) 
-                                    && boardCol[j-2].getEntry(i-2).equals(entry) && boardCol[j-3].getEntry(i-3).equals(entry)){
+                                    && boardCol[j-2].getEntry(i-2).equals(entry) 
+                                    && boardCol[j-3].getEntry(i-3).equals(entry)){
                                 return turn;
                             }
                         }

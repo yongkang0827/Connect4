@@ -18,7 +18,7 @@ public interface ListInterface<T> {
 
   public void clear();
 
-  public boolean replace(int givenPosition, T newEntry); //
+  public boolean replace(int givenPosition, T newEntry); 
 
   public T getEntry(int givenPosition); 
 
