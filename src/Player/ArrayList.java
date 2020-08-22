@@ -115,7 +115,7 @@ public class ArrayList<T> implements ListInterface<T> {
     @Override
     public int getLength(){
        return this.size;
-   }
+    }
    
     @Override
     public boolean replace(int givenPosition, T newEntry){
