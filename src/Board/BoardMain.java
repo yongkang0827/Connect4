@@ -19,7 +19,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author CYL
+ * @author All members
  */
 public class BoardMain {
     
@@ -50,12 +50,13 @@ public class BoardMain {
         PlayerConnectFour play = new PlayerConnectFour();
         SortedLinkedList<Player> sortedPlayerList = new SortedLinkedList<>();
         CircularLinkedList<Token> CirStr = new CircularLinkedList<>();
-        TokenCount token = new TokenCount();        
+        TokenCount token = new TokenCount();     
+        BoardConnectFour mainBoard;
+        Board board;
 
         Tournament tour=new Tournament();
         int rows = 9; 
         int cols = 8;
-        int connectNum; 
         int numOfPlayer;
         int round = 1;
         boolean insertSuccess;
@@ -68,6 +69,7 @@ public class BoardMain {
         String winnerName;
         char currentToken[] = new char[2];
         LinkedList<Character> boardCol[] = new LinkedList[cols];
+        
         
         GameModeConnect4 mode=new GameModeConnect4();
         int gamemode=mode.selectGameMode();
@@ -84,7 +86,7 @@ public class BoardMain {
         tour.display();
         
         
-        connectNum = getConnectNum();
+        int connectNum = promptConnectNum();
                 
         do{
             if(gamemode==1)
@@ -94,11 +96,13 @@ public class BoardMain {
         currentToken[1] = token.retrieveToken(currentPlayer[1].getName(), CirStr);      
         
         System.out.println(currentPlayer[0].getName() + " >> "+ currentPlayer[1].getName());
-        Board mainBoard = new Board(currentPlayer, currentToken);
-        mainBoard.setBoardCol(boardCol);
-        mainBoard.createNewBoard(rows);
-        mainBoard.setTime();
-        startTime = mainBoard.getTime();
+         
+        mainBoard = new BoardConnectFour();
+        board = new Board(currentToken, rows);
+        
+        mainBoard.createNewBoard(currentPlayer, currentToken,boardCol, board);
+        board.setTime();
+        startTime = board.getTime();
         
         do{
             mainBoard.displayBoard();
@@ -130,8 +134,8 @@ public class BoardMain {
                 if(checkResult %2 == 0){
                      winnerName = currentPlayer[0].getName();
                      Player playerW = new Player();
-                     mainBoard.setTime();
-                     timeTaken = mainBoard.totalTimeTaken(startTime);
+                     board.setTime();
+                     timeTaken = board.totalTimeTaken(startTime);
                      totalTime += timeTaken;
                     playerW.setName(currentPlayer[0].getName());
                     if(gamemode==1){
@@ -143,8 +147,8 @@ public class BoardMain {
                 }else{
                      winnerName = currentPlayer[1].getName();
                      Player playerW = new Player();
-                     mainBoard.setTime();
-                     timeTaken = mainBoard.totalTimeTaken(startTime);
+                     board.setTime();
+                     timeTaken = board.totalTimeTaken(startTime);
                      totalTime += timeTaken;
                      playerW.setName(currentPlayer[1].getName());
                      if(gamemode==1){
@@ -184,7 +188,7 @@ public class BoardMain {
         }else tour.champion();
     }
 
-    public int getConnectNum(){
+    public int promptConnectNum(){
         Scanner scan = new Scanner(System.in);
         char selectConnectNum = 2;
         boolean validSelection;
