@@ -46,7 +46,7 @@ public class RankingConnectFour {
         
         for(int i = rankingList.getLength() - 1; i >= 0 ; i-- ){
             if(recordNum <= 10){
-                if(playerNum > 4){
+                if(playerNum > 5){
                     if(rankingList.getEntry(i).getPlayerNum() > 5){
                         System.out.println(String.format("%12d %-8s %-31s %d",
                            (recordNum), 
