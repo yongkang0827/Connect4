@@ -113,9 +113,9 @@ public class PlayerConnectFour {
         
     }
     
-    public String[] retrievePlayerForEachRound(ListInterface<Player> PlayerList,ListInterface<Player> winnerList,int round){
+    public Player[] retrievePlayerForEachRound(ListInterface<Player> PlayerList,ListInterface<Player> winnerList,int round){
         
-        String [] playerName = new String[2];
+        Player[] player = new Player[2];
         int length = winnerList.getLength();
         
       
@@ -123,18 +123,18 @@ public class PlayerConnectFour {
       
         if(length == 0 && round == 1){
             
-            playerName[0] = PlayerList.getEntry(0).getName();
-            playerName[1] = PlayerList.getEntry(1).getName();
+            player[0] = PlayerList.getEntry(0);
+            player[1] = PlayerList.getEntry(1);
             
         }
         else if (length > 0 && round > 1){
            
-            playerName[0] = winnerList.getEntry(length - 1).getName();
-            playerName[1] = PlayerList.getEntry(length + 1).getName();
+            player[0] = winnerList.getEntry(length - 1);
+            player[1] = PlayerList.getEntry(length + 1);
  
         }
         
-        return playerName;
+        return player;
     }
     
     public int getNumberofRoundInAGame(int numOfPlayer){

@@ -105,19 +105,19 @@ public class Tournament{
             System.out.print("Champion of the tournament : "+((Player)tree.getRoot().getData()).getName()+ "\nCongratulations !\n");
         }
 
-        public  String[] retrievePlayerForEachRound(int numPlayer){
+        public  Player[] retrievePlayerForEachRound(int numPlayer){
             int current=size;
             if(numPlayer==4){
                 current=size-4;
             }
         tree.searchNode(current);
-        String [] playerName = new String[2];
+        Player[] player = new Player[2];
 
-            playerName[0] = ((Player)tree.getRoot().getLeft().getData()).getName();
-            playerName[1] = ((Player)tree.getRoot().getRight().getData()).getName();
+            player[0] = ((Player)tree.getRoot().getLeft().getData());
+            player[1] = ((Player)tree.getRoot().getRight().getData());
             size-=1;
    
-        return playerName;
+        return player;
     }
         public  void stepUp(Player player,int numPlayer){
             int current=size;

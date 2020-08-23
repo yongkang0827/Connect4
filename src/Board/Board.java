@@ -6,6 +6,7 @@ package Board;
  * @author Cheong Yin Lam
  */
 
+import Player.Player;
 import java.util.Scanner;
 
 public class Board {
@@ -19,10 +20,10 @@ public class Board {
     int insertTokenPosition = 0;
     int turn = 1;
     
-    String currentPlayer[]; 
+    Player currentPlayer[]; 
     char currentToken[]; 
     
-    public Board(String player[], char tokenChar[]) {
+    public Board(Player player[], char tokenChar[]) {
         this.currentPlayer = player;
         this.currentToken = tokenChar;
     }
@@ -67,7 +68,7 @@ public class Board {
         this.turn = turn;
     }
 
-    public String[] getCurrentPlayer() {
+    public Player[] getCurrentPlayer() {
         return currentPlayer;
     }
 
@@ -75,7 +76,7 @@ public class Board {
         return currentToken;
     }
     
-    public void setCurrentPlayer(String[] currentPlayer) {
+    public void setCurrentPlayer(Player[] currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
@@ -117,9 +118,9 @@ public class Board {
     public boolean insertToken(){
         
         if(turn % 2 == 1){
-            System.out.print("\n\n"+currentPlayer[0] +"'s turn: ");
+            System.out.print("\n\n"+currentPlayer[0].getName() +"'s turn: ");
         }else{
-            System.out.print("\n\n"+currentPlayer[1] +"'s turn: ");
+            System.out.print("\n\n"+currentPlayer[1].getName() +"'s turn: ");
         }
 
         String selectCol = scan.nextLine();

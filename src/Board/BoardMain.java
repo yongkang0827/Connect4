@@ -64,7 +64,8 @@ public class BoardMain {
         
         double startTime, timeTaken;
         double totalTime = 0; // total time for all round
-        String currentPlayer[], winner;
+        Player currentPlayer[];
+        String winnerName;
         char currentToken[] = new char[2];
         LinkedList<Character> boardCol[] = new LinkedList[cols];
         
@@ -83,16 +84,16 @@ public class BoardMain {
         tour.display();
         
         
-        connectNum = setConnectNum();
+        connectNum = getConnectNum();
                 
         do{
             if(gamemode==1)
         currentPlayer = play.retrievePlayerForEachRound(PlayerList, winnerList,round);
             else currentPlayer=tour.retrievePlayerForEachRound(numOfPlayer);
-        currentToken[0] = token.retrieveToken(currentPlayer[0], CirStr);
-        currentToken[1] = token.retrieveToken(currentPlayer[1], CirStr);      
+        currentToken[0] = token.retrieveToken(currentPlayer[0].getName(), CirStr);
+        currentToken[1] = token.retrieveToken(currentPlayer[1].getName(), CirStr);      
         
-        System.out.println(currentPlayer[0] + " >> "+ currentPlayer[1]);
+        System.out.println(currentPlayer[0].getName() + " >> "+ currentPlayer[1].getName());
         Board mainBoard = new Board(currentPlayer, currentToken);
         mainBoard.setBoardCol(boardCol);
         mainBoard.createNewBoard(rows);
@@ -116,38 +117,38 @@ public class BoardMain {
                 turn++;
 
                 if(turn % 2 == 1){
-                    token.addEachRoundToken(currentPlayer[0], CirStr);
+                    token.addEachRoundToken(currentPlayer[0].getName(), CirStr);
                 }
                 else
                 {
-                    token.addEachRoundToken(currentPlayer[1], CirStr);
+                    token.addEachRoundToken(currentPlayer[1].getName(), CirStr);
                 }
             }
             checkResult = mainBoard.checkResult(connectNum);
 
             if(checkResult != 0){
                 if(checkResult %2 == 0){
-                     winner = currentPlayer[0];
+                     winnerName = currentPlayer[0].getName();
                      Player playerW = new Player();
                      mainBoard.setTime();
                      timeTaken = mainBoard.totalTimeTaken(startTime);
                      totalTime += timeTaken;
-                    playerW.setName(currentPlayer[0]);
+                    playerW.setName(currentPlayer[0].getName());
                     if(gamemode==1){
-                     play.calculateAndAssignScore(timeTaken,CirStr.getEntry(1).getCount(),PlayerList,currentPlayer[0]);
+                     play.calculateAndAssignScore(timeTaken,CirStr.getEntry(1).getCount(),PlayerList,currentPlayer[0].getName());
                      winnerList.add(playerW);
                      }else tour.stepUp(playerW,numOfPlayer);
                      round++;
 
                 }else{
-                     winner = currentPlayer[1];
+                     winnerName = currentPlayer[1].getName();
                      Player playerW = new Player();
                      mainBoard.setTime();
                      timeTaken = mainBoard.totalTimeTaken(startTime);
                      totalTime += timeTaken;
-                     playerW.setName(currentPlayer[1]);
+                     playerW.setName(currentPlayer[1].getName());
                      if(gamemode==1){
-                     play.calculateAndAssignScore(timeTaken,CirStr.getEntry(2).getCount(),PlayerList,currentPlayer[1]);
+                     play.calculateAndAssignScore(timeTaken,CirStr.getEntry(2).getCount(),PlayerList,currentPlayer[1].getName());
                      winnerList.add(playerW);
                      }
                      else tour.stepUp(playerW,numOfPlayer);
@@ -156,7 +157,7 @@ public class BoardMain {
                 
                 mainBoard.displayBoard();
                 token.finishEachRound(CirStr);
-                System.out.println("\nWinner is "+ winner.toUpperCase());
+                System.out.println("\nWinner is "+ winnerName.toUpperCase());
                 
                 if(gamemode==2)
                 tour.display();
@@ -183,7 +184,7 @@ public class BoardMain {
         }else tour.champion();
     }
 
-    public int setConnectNum(){
+    public int getConnectNum(){
         Scanner scan = new Scanner(System.in);
         char selectConnectNum = 2;
         boolean validSelection;
