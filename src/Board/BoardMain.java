@@ -82,6 +82,7 @@ public class BoardMain {
         
         
         play.displayPlayerDetails(PlayerList, CirStr);
+               
         if(gamemode==2)
         tour.display();
         
