@@ -9,11 +9,6 @@ package token;
  *
  * @author Yeu
  */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.util.Scanner;
 
@@ -31,37 +26,22 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
         clear();
     }
     
-    /**
-   * Task: Removes all entries from the list.
-   */
     @Override
     public final void clear(){
         head = null;
         size = 0;
     }
     
-   /**
-   * Task: Adds a new entry to the end of the list. Entries currently in the
-   * list are unaffected. The list's size is increased by 1.
-   *
-   * @param newEntry the object to be added as a new entry
-   * @return true if the addition is successful, or false if the list is full
-   */
-    @Override //DONE!
+    @Override 
     public boolean add(T newEntry){
       
         nEw = new Node(newEntry);
-    
-       //since there are no value inside the list
-        //head and rear will be point to the new entry value
+
       if(isEmpty()){
           
           head = nEw;
           tail = nEw;
       }
-      //if size != 0
-      //the new entry will be as a tail of the list
-      // the tail will be point to the address of the ned entry
       else{
           tail.next = nEw;
           nEw.next = head;
@@ -73,29 +53,15 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
        
     }
     
-   /**
-   * Task: Adds a new entry to the start of the list. Entries currently in the
-   * list are unaffected. The list's size is increased by 1.
-   *
-   * @param newEntry the object to be added as a new entry
-   * @return true if the addition is successful, or false if the list is full
-   */
-    @Override //DONE!
+    @Override 
     public boolean addFirst(T newEntry){
         
-       
-        //point to the entry
         nEw = new Node(newEntry);
-        
-        //since there are no value inside the list
-        //head and rear will be point to the new entry value
+
         if(size == 0){
             head = nEw;
             tail = nEw;
         }
-        //if size != 0
-        //the new entry will be as a head of the list
-        // the tail will be point to the address of the ned entry
         else{
             nEw.data = newEntry;
             nEw.next = head;
@@ -107,29 +73,16 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
         return true;
     }
     
-   /**
-   * Task: Adds a new entry to the end of the list. Entries currently in the
-   * list are unaffected. The list's size is increased by 1.
-   *
-   * @param newEntry the object to be added as a new entry
-   * @return true if the addition is successful, or false if the list is full
-   */
-    @Override //DONE!
+    @Override 
     public boolean addLast(T newEntry){
-      	
-      
+      	     
       nEw = new Node(newEntry);
     
-       //since there are no value inside the list
-        //head and rear will be point to the new entry value
       if(isEmpty()){
           
           head = nEw;
           tail = nEw;
       }
-      //if size != 0
-      //the new entry will be as a tail of the list
-      // the tail will be point to the address of the ned entry
       else{
         
          tail.next = nEw;
@@ -142,22 +95,9 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
     return true;
     }
     
-   /**
-   * Task: Adds a new entry at a specified position within the list. Entries
-   * originally at and above the specified position are at the next higher
-   * position within the list. The list's size is increased by 1.
-   *
-   * @param newPosition an integer that specifies the desired position of the
-   * new entry
-   * @param newEntry the object to be added as a new entry
-   * @return true if the addition is successful, or false if either the list is
-   * full, newPosition < 1, or
-   *          newPosition > getLength()+1
-   */
-    @Override //DONE!
-  public boolean add(int newPosition, T newEntry) { 
+    @Override 
+    public boolean add(int newPosition, T newEntry) { 
       
-
     if ((newPosition >= 0) && (newPosition <= size + 1)) {
         
         nEw = new Node(newEntry);
@@ -179,21 +119,15 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
             temp.next = nEw;		
         }
 
-      size++;
-    } else {
-     return false;
+        size++;
+        } else {
+        return false;
+        }
+
+        return true;
     }
 
-    return true;
-  }
-    
-   /**
-   * Task: Removes the entry at the beginning from the list. And the list's size is decreased by 1.
-   *
-   *
-   * @return true if the deletion is successful
-   */
-    @Override //DONE!
+    @Override 
     public boolean removeFirst(){
         
         if(isEmpty()){
@@ -212,18 +146,7 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
         return true;
     }
     
- 
-            
-   /**
-   * Task: Removes the entry at a given position from the list. Entries
-   * originally at positions higher than the given position are at the next
-   * lower position within the list, and the list's size is decreased by 1.
-   *
-   * @param givenPosition an integer that indicates the position of the entry to
-   * be removed
-   * @return true if the deletion is successful, or false if the deletion list is fail
-   */
-    @Override //DONE!
+    @Override 
     public boolean remove(int givenPosition){
       
         temp = head;
@@ -236,26 +159,12 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
             
             temp.next = temp.next.next;
         }
-      
-            
-           
-		size--;
-                return true;
+            size--;
+            return true;
         }
-        
     
-    
-    /**
-    * Task: Retrieves the entry at a given position in the list.
-    *
-    * @param givenPosition an integer that indicates the position of the desired
-    * entry
-    * @return a reference to the indicated entry or null, if either the list is
-    * empty, givenPosition < 1, or givenPosition > getLength()
-    */
-    @Override //DONE!
-    public T getEntry(int givenPosition){
-      
+    @Override 
+    public T getEntry(int givenPosition){   
         
         if (givenPosition >= 1 && givenPosition <= size) {
 			
@@ -269,14 +178,8 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
         }
         
     }
-    
-    /**
-    * Task: Retrieves the entry at a given position in the list.
-    *
-    * @param entry
-    * @return the list
-    */
-    @Override //DONE!
+
+    @Override 
     public T getEntryByValue(T entry){
         
         temp = head;
@@ -290,13 +193,7 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
 		return null;
     }
     
-   /**
-   * Task: Sees whether the list contains a given entry.
-   *
-   * @param anEntry the object that is the desired entry
-   * @return true if the list contains anEntry, or false if not
-   */
-    @Override //DONE!
+    @Override 
     public boolean contains(T anEntry){
         Node currentNode = head;
         
@@ -316,20 +213,10 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
     }
     
     
-     /**
-   * Task: Replaces the entry at a given position in the list.
-   *
-   * @param givenPosition an integer that indicates the position of the entry to
-   * be replaced
-   * @param newEntry the object that will replace the entry at the position
-   * givenPosition
-   * @return true if the replacement occurs, or false if either the list is
-   * empty, givenPosition < 1, or givenPosition > getLength()
-   */
-   @Override
-  public boolean replace(int givenPosition, T newEntry) {
-    
-        
+
+    @Override
+    public boolean replace(int givenPosition, T newEntry) {
+           
       if ((givenPosition >= 1) && (givenPosition <= size)) {
         
             temp = head;
@@ -344,7 +231,7 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
 
       return true;
 
-  }
+    }
     
     @Override
     public String toString() {
@@ -394,9 +281,7 @@ public class CircularLinkedList<T> implements CircularLinkedListInterface<T> {
         private Node(T data, Node next) {
             this.data = data;
             this.next = next;
-        }
-        
-    
+        }   
     }
 }
 
