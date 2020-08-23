@@ -19,8 +19,8 @@ public class RankingConnectFour {
     BoardMain board = new BoardMain();
     Scanner scan = new Scanner(System.in);
     
-    public void rankingBoard(){
-        leaderBoardMenu();
+    public void RankingConnectFour(){
+        
     }
     
     public void displayRankingBoard(SortedLinkedList<Ranking> rankingList, int playerNum){
@@ -40,30 +40,30 @@ public class RankingConnectFour {
         System.out.println(String.format("%13s %16s %28s","Rank","Player Name","Score"));
         System.out.println(String.format("%14s %14s %30s","-----","----------","------"));
         
-        int j = 1;
+        int recordNum = 1;
         //only display for 10 or less than 10 records
         
         for(int i = rankingList.getLength() - 1; i >= 0 ; i-- ){
-            if(j <= 10){
+            if(recordNum <= 10){
                 if(playerNum > 4){
                     if(rankingList.getEntry(i).getPlayerNum() > 5){
                         System.out.println(String.format("%12d %-8s %-31s %d",
-                           (j), 
+                           (recordNum), 
                            " ",
                            rankingList.getEntry(i).getWinner(), 
                            (int)rankingList.getEntry(i).getHighestScore()
                         ));
-                        j++;
+                        recordNum++;
                     }  
                 }else{
                     if(rankingList.getEntry(i).getPlayerNum() == playerNum){
                             System.out.println(String.format("%12d %-8s %-31s %d",
-                               (j), 
+                               recordNum, 
                                " ",
                                rankingList.getEntry(i).getWinner(), 
                                (int)rankingList.getEntry(i).getHighestScore()
                             ));
-                            j++;
+                            recordNum++;
                     }
                 }
             }else{
@@ -77,7 +77,7 @@ public class RankingConnectFour {
 
     }
     
-    public void leaderBoardMenu(){
+    public void displayRankingMenu(){
         board.drawLine(20,25);
         System.out.println(String.format("%41s","Ranking Board"));
         board.drawLine(20,25);
@@ -93,6 +93,7 @@ public class RankingConnectFour {
   
     }
     
+    //records for demo
     public SortedLinkedList<Ranking> prevGameRecord(){
         Player p1 = new Player("Lee",'a');
         Player p2 = new Player("Joan",'b');
@@ -188,12 +189,12 @@ public class RankingConnectFour {
     }
     
     
-    public void rankingBoard(SortedLinkedList<Ranking> rankingList) {
+    public void rankingBoardMenu(SortedLinkedList<Ranking> rankingList) {
         
         RankingConnectFour r = new RankingConnectFour();
 
         int boardPlayerNum = 0;
-        r.leaderBoardMenu();
+        r.displayRankingMenu();
         
         do{
             try{

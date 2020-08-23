@@ -183,8 +183,8 @@ public class BoardMain {
         
         Ranking ranking = new Ranking(sortedPlayerList, totalTime);
         if(gamemode==1){
-        ranking.displayRanking();
-        rankingList.add(ranking);
+            ranking.displayRanking();
+            rankingList.add(ranking);
         }else tour.champion();
     }
 
@@ -307,7 +307,7 @@ public class BoardMain {
 
                 case 2:
                     //Ranking
-                    rankingConnectFour.rankingBoard(rankingList);
+                    rankingConnectFour.rankingBoardMenu(rankingList);
                     break;
                 case 3:
                     //Exit
