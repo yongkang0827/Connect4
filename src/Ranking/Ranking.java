@@ -21,6 +21,7 @@ public class Ranking implements Comparable<Ranking> {
     public Ranking(SortedLinkedList<Player> sortedPlayerList, double totalTime) {
         this.sortedPlayerList = sortedPlayerList;
         this.playerNum = sortedPlayerList.getLength();
+        //Descending the list
         sortedPlayerList.desc();
         this.highestScore = sortedPlayerList.getEntry(0).getScore();
         this.winner = sortedPlayerList.getEntry(0).getName();
@@ -70,11 +71,13 @@ public class Ranking implements Comparable<Ranking> {
         this.totalTime = totalTime;
     }
     
+    //To override the compareTo method in order to sort the list based on the score
     @Override
     public int compareTo(Ranking ranking){
         return (int)(this.highestScore - ranking.highestScore);
     }
     
+    //diplay the ranking board that inside the classic mode
     public void displayRanking(){
         BoardMain board = new BoardMain();
         //title
@@ -106,7 +109,8 @@ public class Ranking implements Comparable<Ranking> {
         System.out.print("\n");
         board.drawLine(52,9);
     }
-    
+  
+   //To clone all the details from one ranking to another ranking
    public void clone(Ranking ranking){
         this.winner = ranking.winner;
         this.sortedPlayerList = ranking.sortedPlayerList;

@@ -308,7 +308,7 @@ public class BoardMain {
 
                 case 2:
                     //Ranking
-                    rankingConnectFour.rankingBoardMenu(rankingList);
+                    rankingConnectFour.selectRankingBoard(rankingList);
                     break;
                 case 3:
                     //Exit

@@ -23,6 +23,7 @@ public class RankingConnectFour {
         
     }
     
+    //Display the ranking board based on the number of player
     public void displayRankingBoard(SortedLinkedList<Ranking> rankingList, int playerNum){
         System.out.print("\n\n");
         board.drawLine(20,25);
@@ -77,6 +78,7 @@ public class RankingConnectFour {
 
     }
     
+    //Displat the ranking board menu
     public void displayRankingMenu(){
         board.drawLine(20,25);
         System.out.println(String.format("%41s","Ranking Board"));
@@ -188,8 +190,8 @@ public class RankingConnectFour {
         return rankingList;
     }
     
-    
-    public void rankingBoardMenu(SortedLinkedList<Ranking> rankingList) {
+    //Ask user to select their option
+    public void selectRankingBoard(SortedLinkedList<Ranking> rankingList) {
         
         RankingConnectFour r = new RankingConnectFour();
 
