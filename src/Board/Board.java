@@ -6,7 +6,7 @@ package Board;
  * @author Cheong Yin Lam
  */
 
-import Player.Player;
+
 import java.util.Scanner;
 
 public class Board {
@@ -89,7 +89,7 @@ public class Board {
     
     //----- cal total time----//
     public double totalTimeTaken(double anotherTime){  //return min
-      double timeTaken;
+      double timeTaken; 
       
       if(time > anotherTime){
            timeTaken = time - anotherTime;
