@@ -24,6 +24,7 @@ public class Tournament{
 
     private static BinaryTree tree;
     static int size;
+    
     public Tournament(){
         tree=new BinaryTree();
         size=7;
@@ -66,28 +67,28 @@ public class Tournament{
             for(int i=1;i<=tree.size();i++){
                 tree.searchNode(i);
                 if(currentLayer!=tree.layer(tree.getRoot())){
-                currentLayer=tree.layer(tree.getRoot());
-                 System.out.print("\n");
-                for(int j=0;j<times;j++){
-                if(tree.layer(tree.getRoot())==1)
-                System.out.print(String.format("%27s", "|"));
-                if(tree.layer(tree.getRoot())==2)
-                System.out.print(String.format("%18s", "|"));
-                if(tree.layer(tree.getRoot())==3)
-                System.out.print(String.format("%11s", "|"));
-                if(tree.layer(tree.getRoot())==4)
-                System.out.print(String.format("%6s", "|"));
-                
+                    currentLayer=tree.layer(tree.getRoot());
+                    System.out.print("\n");
+                    for(int j=0;j<times;j++){
+                        if(tree.layer(tree.getRoot())==1)
+                        System.out.print(String.format("%27s", "|"));
+                        if(tree.layer(tree.getRoot())==2)
+                        System.out.print(String.format("%18s", "|"));
+                        if(tree.layer(tree.getRoot())==3)
+                        System.out.print(String.format("%11s", "|"));
+                        if(tree.layer(tree.getRoot())==4)
+                        System.out.print(String.format("%6s", "|"));
+
+                    }
+                    times*=2;
+                    System.out.print("\n");
+
                 }
-                times*=2;
-                System.out.print("\n");
-                
-                }
-                //System.out.print("   "+tree.getRoot().getData()+"    ");
-                
+
                 if(tree.getRoot().getData().equals("-"))
                 display="PENDING";
                 else display=((Player)tree.getRoot().getData()).getName();
+                
                 if(tree.layer(tree.getRoot())==1)
                 System.out.print(String.format("%30s", display));
                 if(tree.layer(tree.getRoot())==2)
@@ -127,14 +128,6 @@ public class Tournament{
             tree.searchNode(current+1);
             if(player.getName()==((Player)tree.getRoot().getRight().getData()).getName())
                 tree.replace(tree.getRoot().getRight().getData(),current+1);
-            else tree.replace(tree.getRoot().getLeft().getData(),current+1);
-            
-            
-        }
-        
-        public void clear(){
-            tree.clear();
-        }
-        
-    
+            else tree.replace(tree.getRoot().getLeft().getData(),current+1); 
+        }   
 }
