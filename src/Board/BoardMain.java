@@ -35,7 +35,7 @@ public class BoardMain {
         System.out.println(String.format("%5s %s", " ", "===================================================="));
         System.out.println("\n");
         System.out.println(String.format("%20s %s", " ", "(1)  Play Game"));
-        System.out.println(String.format("%20s %s", " ", "(2)  Leader Board"));
+        System.out.println(String.format("%20s %s", " ", "(2)  Ranking Board"));
         System.out.println(String.format("%20s %s", " ", "(3)  Exit"));
         //System.out.println("\n");
         System.out.print(String.format("\n%13s %s", " ", "Your selection (1/2/3): "));
