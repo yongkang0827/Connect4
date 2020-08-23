@@ -173,7 +173,7 @@ public class BoardMain {
         }while(insertSuccess);
         
         
-        }while(round <= play.getNumberofRoundInAGame(numOfPlayer));
+        }while(round <= play.getNumberofRoundInAGame(PlayerList));
         
         for(int i = 0; i < PlayerList.getLength(); i++){
             Player temp = new Player();

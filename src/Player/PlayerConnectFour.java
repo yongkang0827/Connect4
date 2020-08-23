@@ -137,9 +137,9 @@ public class PlayerConnectFour {
         return player;
     }
     
-    public int getNumberofRoundInAGame(int numOfPlayer){
+    public int getNumberofRoundInAGame(ListInterface<Player> PlayerList){
         
-        int round = numOfPlayer - 1;
+        int round = PlayerList.getLength();
         
         return round;
     }
