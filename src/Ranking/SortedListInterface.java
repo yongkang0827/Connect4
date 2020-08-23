@@ -28,7 +28,5 @@ public interface SortedListInterface<T extends Comparable<T>> {
 
     public boolean isEmpty();
     
-    public String toString();
-    
     public void desc();
 }

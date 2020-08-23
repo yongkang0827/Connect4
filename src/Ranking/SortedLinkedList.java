@@ -148,17 +148,6 @@ public class SortedLinkedList <T extends Comparable<T>> implements SortedListInt
     public boolean isEmpty() {
         return (length == 0);
     }
-
-    @Override
-    public String toString() {
-        String outputStr = "";
-        Node currentNode = firstNode;
-        while (currentNode != null) {
-            outputStr += currentNode.data + "\n";;
-            currentNode = currentNode.next;
-        }
-        return outputStr;
-    }
     
     @Override
     public void desc(){
