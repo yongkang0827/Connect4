@@ -10,7 +10,7 @@ package GameMode;
  */
 
 public class BinaryTree <T> implements BinaryTreeInterface<T>{
-        private Node root;//means the current node
+        private Node currentRoot;//means the current node
         private Node left;
         private Node right;
         private Node topRoot;//the top root of the tree
@@ -20,8 +20,8 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
         public BinaryTree(){
         clear();
         nextPosition =1;
-        root=null;
-        topRoot=root;
+        currentRoot=null;
+        topRoot=currentRoot;
         }
     
             class Node<T>{
@@ -105,38 +105,38 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
     }
 
     public Node getRoot() {
-        if(root==null)
+        if(currentRoot==null)
             return error;
-        else return root;
+        else return currentRoot;
     }
 
     public void setRoot(Node root) {
-        this.root = root;
+        this.currentRoot = root;
     }
    
       public void addRoot(T newEntry){
-       if(root==null){
-       root=new Node(newEntry);
-       topRoot=root;
-       parent=root;
+       if(currentRoot==null){
+       currentRoot=new Node(newEntry);
+       topRoot=currentRoot;
+       parent=currentRoot;
        } else System.out.print("Node already exist\n");
    } 
     
     public void addChild(T newEntry1,T newEntry2){
-        if(root!=null){
+        if(currentRoot!=null){
         
-            if(root.getLeft()==null){
-                left=new Node(newEntry1,root,null,null);
-                root.setLeft(left);
+            if(currentRoot.getLeft()==null){
+                left=new Node(newEntry1,currentRoot,null,null);
+                currentRoot.setLeft(left);
                 
             }
             else{ System.out.print("Node already exist");
-            System.out.print(root.getLeft().getData());
+            System.out.print(currentRoot.getLeft().getData());
             }
        
-            if(root.getRight()==null){
-                right=new Node(newEntry2,root,null,null);
-                root.setRight(right);
+            if(currentRoot.getRight()==null){
+                right=new Node(newEntry2,currentRoot,null,null);
+                currentRoot.setRight(right);
                 
             }else System.out.print("Node already exist");
         
@@ -148,7 +148,7 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
             return;}
         
         if(positon==node.getPosition()){
-            root=node;
+            currentRoot=node;
            }
         searchNodeRecursive(node.getLeft(),positon);
         searchNodeRecursive(node.getRight(),positon);     
@@ -160,13 +160,13 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
     
     public void printNode(int positon){
         searchNodeRecursive(topRoot,positon);
-        System.out.print(root.getData()+"\n"); 
+        System.out.print(currentRoot.getData()+"\n"); 
     }
     
     public boolean contains(T entry){
         for(int i=0;i<nextPosition;i++){
             searchNode(i);
-            if(entry==root.getData())
+            if(entry==currentRoot.getData())
                 return true;
         }
         return false;
@@ -176,8 +176,8 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
         boolean replace=false;
             
         searchNode(position);
-        if(root!=null){
-        root.setData(entry);
+        if(currentRoot!=null){
+        currentRoot.setData(entry);
         replace=true;
         }
         
@@ -272,7 +272,7 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
             for(int i=0;i<n;i++){
                 nextLeft();
             }
-            return root;
+            return currentRoot;
         }
          
     //travel the current node to right side of n layer
@@ -281,15 +281,15 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
             for(int i=0;i<n;i++){
                 nextRight();
             }
-            return root;
+            return currentRoot;
         }
         
          //travel the current node to left side of next layer
     public Node nextLeft(){
-        parent=root;
+        parent=currentRoot;
         if(getRoot().getLeft()!=null){
-        root=getRoot().getLeft();
-        return root;
+        currentRoot=getRoot().getLeft();
+        return currentRoot;
         }
         
         return error;
@@ -297,10 +297,10 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
     
     //travel the current node to right side of next layer
     public Node nextRight(){
-        parent=root;
+        parent=currentRoot;
         if(getRoot().getRight()!=null){
-        root=getRoot().getRight();
-        return root;
+        currentRoot=getRoot().getRight();
+        return currentRoot;
         }
         
         return error;
@@ -308,52 +308,40 @@ public class BinaryTree <T> implements BinaryTreeInterface<T>{
     
     //travel the current node to right side which has same parent
     public Node beside(){
-        Node current=root;
+        Node current=currentRoot;
         previous();
 
         if(current.equals(nextRight())){
             previous();
             nextLeft();
         }
-        return root;
+        return currentRoot;
     }
     
 
     //travel the current node to parent node
     public Node previous(){
-        root=parent;
-        return root;
+        currentRoot=parent;
+        return currentRoot;
     }
         
     //travel to the top node
     public Node topRoot(){
-        root=topRoot;
-        return root;
+        currentRoot=topRoot;
+        return currentRoot;
     }
 
     public Node getLeft() {
-        if(root.getLeft()==null)
+        if(currentRoot.getLeft()==null)
             return error;
-        else return root.getLeft();
+        else return currentRoot.getLeft();
     }
 
-    public void setLeft(Node left) {
-        this.left = left;
-    }
 
     public Node getRight() {
-        if(root.getRight()==null)
+        if(currentRoot.getRight()==null)
             return error;
-        else return root.getRight();
+        else return currentRoot.getRight();
     }
-
-    public void setRight(Node right) {
-        this.right = right;
-    }
-     
-
-    
-    
-         
-         
+   
 }
