@@ -100,11 +100,7 @@ public class Tournament{
             }
             System.out.print("\n\n");
         }
-        
-        public void champion(){
-            tree.topRoot();
-            System.out.print("Champion of the tournament : "+((Player)tree.getRoot().getData()).getName()+ "\nCongratulations !\n");
-        }
+
 
         public  Player[] retrievePlayerForEachRound(int numPlayer){
             int current=size;
@@ -120,6 +116,7 @@ public class Tournament{
    
         return player;
     }
+        
         public  void stepUp(Player player,int numPlayer){
             int current=size;
             if(numPlayer==4){
@@ -130,4 +127,10 @@ public class Tournament{
                 tree.replace(tree.getRoot().getRight().getData(),current+1);
             else tree.replace(tree.getRoot().getLeft().getData(),current+1); 
         }   
+        
+                
+        public void champion(){
+            tree.topRoot();
+            System.out.print("Champion of the tournament : "+((Player)tree.getRoot().getData()).getName()+ "\nCongratulations !\n");
+        }
 }
