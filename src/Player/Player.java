@@ -17,6 +17,7 @@ public class Player implements Comparable<Player>{
     private double score;
     
 
+    
     public Player() {
     }
 
